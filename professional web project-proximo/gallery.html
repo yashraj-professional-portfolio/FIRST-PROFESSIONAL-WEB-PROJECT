@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gallery | ProXimo Robotics &amp; Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eceef0",
+                        "outline": "#717782",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#001c37",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "primary": "#005a9c",
+                        "primary-fixed-dim": "#a0c9ff",
+                        "on-surface-variant": "#414751",
+                        "background": "#f7f9fb",
+                        "secondary": "#994700",
+                        "status-warning": "#F59E0B",
+                        "tertiary": "#4e596d",
+                        "on-secondary-fixed-variant": "#743400",
+                        "on-primary-container": "#f2f5ff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-container": "#632c00",
+                        "status-error": "#EF4444",
+                        "surface-container-highest": "#e0e3e5",
+                        "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                        "status-success": "#10B981",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "surface": "#f7f9fb",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#00497f",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdbc8",
+                        "surface-tint": "#0061a6",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#667186",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c1c7d3",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#ff8429",
+                        "primary-fixed": "#d2e4ff",
+                        "primary-container": "#1e73be",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed": "#d8e3fb",
+                        "on-secondary-fixed": "#321300",
+                        "tertiary-fixed-dim": "#bcc7de",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#a0c9ff",
+                        "on-tertiary-container": "#f4f6ff",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-fixed": "#111c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "gutter-desktop": "24px",
+                        "unit": "8px",
+                        "container-max-width": "1280px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, rgba(30, 115, 190, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 115, 190, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(30, 115, 190, 0.1);
+        }
+        .active-filter {
+            background-color: #005a9c;
+            color: white;
+            border-color: #005a9c;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background selection:bg-primary/20"><!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<!-- Top Ribbon -->
+<!-- Navigation Shell -->
+<!-- Hero Section -->
+<section class="relative h-[70vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Industrial automation project gallery background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXG1iLTyRpSGVMdT_JNQDuNbwmaDlmHsC2hEVY8nhuAhUOBioKlz5LRzILD87_DeUh_XLNEaGFa_iC2XWjlcaJgwSZg61JgN0ttLrSjGJ1-bUfhVmcZvpHCGhXcRXoskCQ1Rpt0rcsMnYdpupH9ZgVmL-U_4eeASryAURSRWmd1E1e46u-UzRMbF3FQnv_z2AgrBigbQ7dbxi2Dvg_Jwz_s5hOWwUHlZtKmSkKQ9UlPOqfOxMY-V8SElfm1EMtvz61JtfwnM27b5lX">
+<div class="absolute inset-0 hero-overlay"></div>
+</div>
+<div class="relative z-10 w-full max-w-container-max-width mx-auto px-margin-desktop py-16">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white border border-white/30 px-4 py-1.5 rounded-full mb-6">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">gallery_thumbnail</span>
+<span class="font-label-sm uppercase tracking-wider">Portfolio v4.0</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white leading-tight mb-6">
+                Project Gallery
+</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl mb-10">
+                Explore our automation projects, robotics integrations, control panel installations, Industrial IoT implementations, and smart manufacturing solutions.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:translate-y-[-2px] shadow-lg">View Our Projects</button>
+<button class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg font-bold transition-all">Download Brochure</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Introduction -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-desktop items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Showcasing Engineering Excellence</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        At ProXimo Robotics &amp; Automation, every project reflects our commitment to innovation, quality, and customer success. Browse our portfolio of industrial automation systems, robotics solutions, control panels, and smart factory implementations.
+                    </p>
+</div>
+<div class="flex justify-end gap-12 border-l border-outline-variant/30 pl-12 h-fit">
+<div>
+<div class="text-primary font-display-lg text-display-lg mb-1">20+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Years Experience</div>
+</div>
+<div>
+<div class="text-primary font-display-lg text-display-lg mb-1">Global</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Project Scope</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter Section -->
+<section class="sticky top-[120px] z-40 bg-white/90 backdrop-blur-md border-y border-outline-variant/20 py-4 shadow-sm">
+<div class="max-w-container-max-width mx-auto px-margin-desktop overflow-x-auto">
+<div class="flex items-center gap-3 whitespace-nowrap min-w-max">
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all active-filter">All Projects</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Robotics</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Automation</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Control Panels</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Industrial IoT</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Smart Factory</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-all">Manufacturing Solutions</button>
+</div>
+</div>
+</section>
+<!-- Project Gallery Grid -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Cutting SPM Machine" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuvpUFtxChP30AlGFC0QiKrGBzqRC8k4DXp6xzrnoDF-jyDCkP56p_aOOPNh1C-UX0nUJPLEBVILPfclseBBBcA5LrhDek3RUkAYPT2g74CeH_w3I1E6UOn3Wl12PHSQkb7dEonnfr6TuKIRZElNorVz255pUo5m6TZyFuehkPrFz7wPdWQemQTcHQCLBSVxs9ILkLSXj4UQ47vwfwaLBWR8w3iVTy1h9L3gmIjq3xboWlHS-qFeABXFe9vKHy_0EWh8ALwAAIShml">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Special Purpose Machines</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Cutting SPM</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">High-precision automated cutting solution for industrial manufacturing lines.</p>
+</div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-8 text-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-primary text-[48px] mb-4">settings_suggest</span>
+<button class="text-on-primary border-b border-on-primary font-label-md text-label-md py-1">View Case Study</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Industrial Enclosure Systems" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq0-Pumq5Xz3P2Z20J0hgR351o7_NYrlqiGyq3uvI0f0pfAYmYoNWYjgPviS0bBhbaK6jAVTgwibd-rjsCQhlryzjYQSA8CVcP31DWqS9_43E57OlFcdSA-akKLUjiONqSMBPqQHrD_FgbTSswZWxUg6UXuA1PwDCELSbkYjlYKNYOMQc1nzVqC7Vlz7qaNpHCHuQlAyCSSepLcAUf2HAs9muQ0of8b0dPMb8RAo_iE_jQfVoAezm3jMDLEjqmM_LG3PK5y-hbJoZG">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Control Panels</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Industrial Enclosure</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Ruggedized control enclosures designed for harsh factory environments.</p>
+</div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-8 text-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-primary text-[48px] mb-4">dock_to_bottom</span>
+<button class="text-on-primary border-b border-on-primary font-label-md text-label-md py-1">Technical Specs</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[4/3] md:aspect-[3/4] overflow-hidden">
+<img alt="Lathe Machine Automation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOLIkkQbQeeq747XWBY-Rnu-B1I7fixe0Q62vwMbrQD2y18UL1dwAJlb9kPxTwnOvQ_NVmxJzOWtq--g6xgOxdF3zw54AwQmn_9nJ_Li9TFBnZTiljmAYl3OVXqHsBxzv_v-Ep6ODDonihhz-XEDaqsxqKodRXxYoGV3Z0z09yo2rIY9wxykb0jj91htuIS0zoUpS3BRacPnNQATy8NI5GkJWivgI79pkF15usWO_35HzTnlDg1TQsbkQoxSo2dTWpDFe-iH5zyNR6">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Machine Automation</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Lathe Machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Full CNC conversion and automation of heavy-duty industrial lathes.</p>
+</div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-8 text-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-primary text-[48px] mb-4">precision_manufacturing</span>
+<button class="text-on-primary border-b border-on-primary font-label-md text-label-md py-1">View Details</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Milling Machine Integration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRfP6BcS5cI2T4A2M7O_lCRNeCsR_myg1aLEQ3UgcLYrEmomeqO0jV7vKgTm0lEjPlnobY3b8T27e74Cz1l-sVIZWtlC-MS7brAvIJIepjimUZAb7AmJsiJI1SkzmSAZaQZjZ-hUPMrK1E7QCyLhOUxKkvxgJIu5JbVALk6U8FNkQ9mxtE0wkfH_ZVSY1Gc0qa1D0Nc0JvXucU5G_v1ja9CrRK5h52C990YzWkghnl-rKNNll--tRHXdO6f_8jfIexm208SzhH6-4f">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Manufacturing Solutions</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Milling Machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">5-axis milling automation for complex component manufacturing.</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[4/3] md:aspect-[3/4] overflow-hidden">
+<img alt="Control Panel Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYC_W0BeTCuJcpRDgySmT6_C1xWslWbJihHmq55SNexgs5mJUatcqucxoFwBXGYutgwXY0hysRh5vL3oR_EUQNCrU71pni347EsZz0NS30eu9IXYfO4QNGmlfVBiit2rWTr9CCDSt-8frqB0tMwzBzzwj7zNAO0swNFexGTDMeuAOnku50SZl-pRb5BXkHe863xwoQF2Whj1BTz08dq02bxjnn_WPKvRHqUpAcQxX7-VR8VSivbLJ8qiZNXad3TRUmeLmG_nEJ5g8Q">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Automation</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Control PLC panel&nbsp;</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Internal wiring and component layout for precision control systems.</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[4/3] md:aspect-[3/4] overflow-hidden">
+<img alt="Custom Assembly Line" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKodGSHt3k9Ph_xn4E1rSS07j0JvV8cxx3zzdNQPfLdIa8XbmQLqS9ppaXJN4XfSX62CzGmV8pAspZXmX4xchQMfV0Y6LyRyW7ck91Q2Cm3_gYHVXlmKXLPnRebe5FooQDduR_1PsnXujxA6X9ry-D2IVzRUNbYV4qEIYl8R2yZk_dxFnRMJPYmYJ7mS-P7ACiZMGuB0NILKRBfFuBikzqQQnZy_cVZsGcdf13Jby4usd0Faz_3bPuRdl3smN-ev029cSbGwjY2I7I">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Robotics Integration</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Hard Stuffing Machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">End-to-end robotic assembly line for high-volume electronics.</p>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Precision Boring Machine" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5WKNq7taqlwSGTnyIPRbAzKwtD97EkPhErlWlPKRDMdZD2Xfs6H5HcBJ5ox0n42qQBOEvIkavmrDQf3jMRIRftbEZZUaV4WzP7vy91KvsOqhdBFfQq7w_IqhOn-KtlS72EDyUKCC4ShUDhjYvXJQWVLVIaJWtxJTGe6jViQrUNUPjc_CTb7O5HWJhXeHpC-4iV-fBalCJsJ-gd1cx-h1hyuTPUdkYUyP36I3osnXit8DXfJ5x6KmQUjwYchjGzW5yAaBHY0o0Ea6q">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Engineering</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Boring Machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">High-tolerance boring automation for engine block production.</p>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="ProXimo R&amp;D Facility" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2GvdKLJnuiA848659vl9b7Nomx2JW5A0ASOeOn8eEglnVwnZimI-woX2TLCrAmOtDpFuDHNV01Zdbrhe3lEOwn26McpDwOdQ2dmdk75uJGm3VcWAEnntrYoM_0-efFE6BtiaxQcNfaZgQ4O7_Vx1fBq0TObsKkTdsQYfh5lGsr6cWRkHULhHS-tBJpdAt7Q9iZvmBXmwd1h0EJ4VJN4R3ZNR6n8GB3-k4lq3NafSfjjeELQXM0SARBbP6bQRuZPmOl4iSFFi7MOkQ">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Company</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Nexus R&amp;D Hub</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Our main engineering facility and robotics testing center.</p>
+</div>
+</div>
+<!-- Card 9 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Robotic Welding Cell" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbIVVGEV-lNY9yHfbmxr2Km7vMMcDm91awxxvVyXHVUkrw2Ft-flimfl49pTr1zORZg-7nSCQjYuh3_yZRp5YMVisSyRB4K4ISa8pypGcdQaZrrmC1EVpuorXGhunoVUZMuX8zrA7rDSJZL_tCxO8ZzRGFclPOkgS1EyQ1irv3t70jxJgxgJSN_ENZVatrhQ6hhgVA4cSia41FhUwHzUOO8-oIZxs_f69jNAgBQxx0SEo-qHMiG0ZhlxdJfTUJIj9Ud5UduQGsfgqu">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Robotics</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Guague</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">High-speed automated welding system for precision automotive components.</p>
+</div>
+</div>
+<!-- Card 10 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Advanced Fixture Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE2snNvnJLt_CfnFp2p-W8IqWMnP9PnQPq3Vfq9-SDZ82K9vEVl1O3lVR5Y8llnIqkoFYFZ3wShBOA4Y3C4UMxNsbmeNzLGs2nQCEk0DL3fqBdLNuawKjRShXEVhAgR6SCuJ8R7NYiuVcYVX10Gez9M5GdM6cRlg3TMHJ8z4xCvK9DAyhHpVq5_Gm3ScYvJMr5csmWkz9M_e4t8X04K3OkaHcoB4FUKdmlvVl53LZ6_7LB_RET9QA8-VEOvrVqiDo40LPL3-1nkzdD">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Manufacturing</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Advanced Fixture Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Custom pneumatic clamping fixtures for high-accuracy machining operations.</p>
+</div>
+</div>
+<!-- Card 11 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Automated Workstation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4B7SshpX64-G0BFRYjgbjTA8zH-FFEt5vCo1CCgvtjl7oqVSiHyPTBWXlu0-1jivOw287SVqV3PHNmj-Z7BQUieSS9pDuh3hB4XnpCf2AIcI-DLd-uaRHuumStDiBenpvST7Kv52EiVhNok9zwzTcwP5twopx0FQdgluV6EsLeqwBiRKRO4KtOsWuZq7Yo8Xdh4CZ5DckaUM_pDmDvgyQLrtixQhLX4vYI1GbW48yx7IP8vsI9WGS82o1uUg-2_r5_OZxxGaopZuu">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Smart Factory</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">torch rotary SPM</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Integrated rotary torch station with real-time process monitoring.</p>
+</div>
+</div>
+<!-- Card 12 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Precision Assembly Jig" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqG4qsXlio6-gBsWFvFGoaGSP5Qo_5VTnKZhUJMf5Y57Lp6Rd7cz0jWegbiqyH-hFvdmqr2jq7zVS4ECjqRkO6oOMjHlObsZ4QuDpGRXMJPK_fC1fTpNyuV4zmevUjL_oFkhaU5oaRXWkA0t83McO8_pyjMF_RJk5l24B1P8ZwVTzelyj3Q1C1oF4nIOWkZ-jydv8GcTcWe2J4IvRK6yHqwvBO3r4TVYF2J81kYfDkXsSRxSRyg98ban4q0udPwbNl6AXmbd2XHgf5">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Manufacturing Solutions</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Precision Assembly Jig</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Manual toggle-clamp assembly fixture for complex pipe geometries.</p>
+</div>
+</div>
+<!-- Card 13 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Robotic Gripper System" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcFjuBamGiv3l8laCxhnBqO5350dTWRFTLh-r0mDdW4Yn61Y8fv8x9V9OmZT8fklv3oSAb4WGIYUTMl_8HcIxmr3QjxivwBjDO0PgJG9Du5fptdq54fPskdtXN41gUQm5ABXPG4KcDVUzFHWOWYzdu019Q-C1D5oVlR-LcO8NiALyaKbvTWQPdZjzCCzc5ywWipq9qsOkf3aPHBhX2cPRetj4DZYCKoiuneg_Sgbd1_SwmIWrVbHAq8U5OQ8AHpp_jQD8vfBDqF-AR">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Robotics Integration</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Robotic Fixture</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Multi-functional end-of-arm tooling for diverse material handling tasks.</p>
+</div>
+</div>
+<!-- Card 14 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Modular Automation Unit" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH1QuVv1YUVNnUEAmtZMOEnQZ8JLshobruu8_but1pL24_CJgzyFKH0M4M1KkolABFlheOPKW7hgnZhfLh1nnMc1fEP6ginPJPNnvcf6OC_Fz1zUkEpPv5ODG8_9br3KiPm7VV12nclPmU739Eo-SCXQkhWTpMnACH23zNMRwoerAU6EMMD5_KrWEM1Rgr5tkuyVdE1qI5_0gNiGEy_OxuU0RJlNF5wZbKoil1evQ5ABtK0_-l4OdnANcrIcDisU31JHCSawyGF4ON">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Control Panels</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Modular Automation Unit</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Scalable automation modules for flexible manufacturing line expansion.</p>
+</div>
+</div>
+<!-- Card 15 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Heavy Duty Machining Center" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqXEBXqasdIkbqxmVS007XmKg_43lF8pbGBXmkSxgjfuNfqxm6ryBs-1N1jyu10DZfBETt3y2blAUsuZv0Np8ejjVELfkxHmpjXv8VPJmsrPCrlITr_3hUCITeJjF5vDjw2QVR6PmhqLAucHOsg2VHeQT0VJ-matqYH4j7KG9WJPfoVWHcXh_z2ErD_3DneW7eMbJKq8OUwwJYlewPerqh9CE7w6KWtsHlvkFbqlqmQKBI7F7zsrloPSAdCH1lmb1rrh9IGfEBxNgk">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Manufacturing Solutions</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Robotic welding Fixture</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Large-scale automated machining cell for industrial components.</p>
+</div>
+</div>
+<!-- Card 16 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Industrial Control Interface" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvlJv04DORrjlc6tGiW7uKqFRHAC0ukcNliaTSRY3mN05LU_kgvbfTlgIHgjXH_JLLjAWY7x1Hf2USwwFp1bKc-zhmbrC4kKSSAZzhRH0v0any4Y5RvhDRllol2moQNfqeuxzziljVOeZU88AcemHRJ31eDRTrj7bOJ1c4bvWiiCGYnyex4eysJJXLUGePgr7tDVv96VWZatVMUzhH2H04IY2j5-_Q74JQbP30sq_YoLY2VUZJmfXw4FxqV-GJ_JwEsqYSC33bN-ZA">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Control Panels</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">IoT display</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Intuitive human-machine interface for real-time system diagnostics.</p>
+</div>
+</div>
+<!-- Card 17 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="IoT Enabled Factory Cell" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCieW0fu8x58V3iT6MbhPLm9fQQEWOYrtFpRr8eXu7ZMjgHw8ekITmscB-oA9aOVXHQwR9WQwtJSe7avDSg9n0IegddhsAJ0LbfM_oyM67ILAqBQa4JOvmATk1tPhMoqRF7apVyvup_Zkle7JfrY4ZaqYyveGRR8Ts1Rs_OwRfbjBo-PLGxiI8mT1lgGOXq0C73wgadeAg_YH-l209--iNKttyWJEmtBSn3dam49S-hWrt58yYQrBJNkhq7jSMrQcraMFOuQEssKR1">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Industrial IoT</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Leakage testing machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Smart manufacturing cell with cloud-connected performance tracking.</p>
+</div>
+</div>
+<!-- Card 18 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Logistic Box Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2maaMqLuZHr2sVHZoqfsCM3bCbTgwHkDLRYJNOKTATsXpYag-xSHCBE6loI3vQ9MwSrDuGl9s8jZJvzKej1JqN-j07uoYGIROE7tQDSisbRJFJXI5DcRaW_sc0DD6yGDAjUTQAAZPglJVly_fYTIa9MN5kyWwOYaaOGHBoTLA_qqfsw3HPJBGtGDDkuJFhzu78v12QNFe29EHHizIuvEAB1D7Xy89zE-vUk8Xk2vaz2_3YI0lKQzDqFvlIaQ9RTqjLtDkOsEN91fh">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Automation</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Logistic Box System</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Automated material handling and sorting solution for logistics.</p>
+</div>
+</div>
+<!-- Card 19 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Smart Manufacturing Hub" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApJO49PkG4E_ztm4MYEYdgD5lwwWBK6xPRGEMdgX6O2Ex2nZ5fMEnDcOjemvESPLZhtf92VbwT2av4PRZRCr231hPpSzOOR8d3RasAmW6hRkIxyUQEL7sp-0FHAdS-rcyyXWtcnlUuFgeK8rT8VMGsu0ZTblWehVDidYbgHnjBgsr9KjFD7hG_UOAhczUFx5MjTbmvZMxXwFA-FDOd_liEvUe5e1-3Hzve1-zVlSykKSBVoS1CDmprG_M9lMjo27OgerJMWtiPywfI">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Smart Factory</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Marking SPM</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Centralized control and monitoring station for factory-wide automation.</p>
+</div>
+</div>
+<!-- Card 20 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/30 card-hover transition-all duration-500">
+<div class="aspect-[3/4] overflow-hidden">
+<img alt="Leak Testing Station" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXu1lKMM-bCeLcMBOjcORgFbWtQnZpYMwXZqtg9HcJlhUtk-2L4y2-4AUpcf4n2N0T8UcKBnJcf2hLtiEFkUQvMX17Qjpbz2o4dZeYlx9tUXGi2po2GoEqatFsYbWVT9vUVqTlFcG9KPHfLa7J6xn3Cjrb-3R0eRLD_S4POSczirVHaPe5WlA6P0O36Qdw9FtsL8meDB7FRZ-We-meKZEqLy9TFbD7aZIAxpsO1HAFkFnuwGVLbVk6ID_Bz29hV3ef_hEfthvqqERV">
+</div>
+<div class="p-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Automation</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Leak Testing Station</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Automated quality assurance station for high-pressure component testing.</p>
+</div>
+</div></div>
+</div>
+</section>
+<!-- Project Highlights -->
+<section class="py-24 bg-white relative overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop space-y-32">
+<!-- Highlight 1 -->
+<div class="flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-1/2 relative">
+<div class="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-lg -z-10"></div>
+<div class="rounded-xl overflow-hidden shadow-2xl border border-outline-variant/30">
+<img alt="Advanced Robotics Integration Details" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKodGSHt3k9Ph_xn4E1rSS07j0JvV8cxx3zzdNQPfLdIa8XbmQLqS9ppaXJN4XfSX62CzGmV8pAspZXmX4xchQMfV0Y6LyRyW7ck91Q2Cm3_gYHVXlmKXLPnRebe5FooQDduR_1PsnXujxA6X9ry-D2IVzRUNbYV4qEIYl8R2yZk_dxFnRMJPYmYJ7mS-P7ACiZMGuB0NILKRBfFuBikzqQQnZy_cVZsGcdf13Jby4usd0Faz_3bPuRdl3smN-ev029cSbGwjY2I7I">
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] mb-4 block">Case Study 01</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Advanced Robotics Integration</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed">
+                        We developed a multi-stage robotic assembly system for a leading automotive manufacturer, improving throughput by 45% while maintaining sub-millimeter precision. The system integrates real-time vision processing and synchronized motion control.
+                    </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Synchronized 6-axis robot control</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Integrated AI quality inspection</span>
+</li>
+</ul>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all">Learn More</button>
+</div>
+</div>
+<!-- Highlight 2 -->
+<div class="flex flex-col md:flex-row-reverse items-center gap-16">
+<div class="w-full md:w-1/2 relative">
+<div class="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary/10 rounded-lg -z-10"></div>
+<div class="rounded-xl overflow-hidden shadow-2xl border border-outline-variant/30">
+<img alt="Custom Control Panel Interior Manufacturing" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYC_W0BeTCuJcpRDgySmT6_C1xWslWbJihHmq55SNexgs5mJUatcqucxoFwBXGYutgwXY0hysRh5vL3oR_EUQNCrU71pni347EsZz0NS30eu9IXYfO4QNGmlfVBiit2rWTr9CCDSt-8frqB0tMwzBzzwj7zNAO0swNFexGTDMeuAOnku50SZl-pRb5BXkHe863xwoQF2Whj1BTz08dq02bxjnn_WPKvRHqUpAcQxX7-VR8VSivbLJ8qiZNXad3TRUmeLmG_nEJ5g8Q">
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] mb-4 block">Case Study 02</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Custom Control Panel Manufacturing</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed">
+                        Precision engineering for complex control systems. Our panels are built for redundancy and clarity, ensuring maximum uptime for critical industrial processes. Every unit undergoes rigorous 48-hour stress testing before deployment.
+                    </p>
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div class="p-4 bg-surface-container rounded-lg">
+<div class="font-headline-md text-headline-md text-primary">IP67</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Environmental Rating</div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg">
+<div class="font-headline-md text-headline-md text-primary">100%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">UL Certified</div>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all">Request Specs</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Statistics Section -->
+<section class="py-24 bg-primary text-on-primary relative overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop relative z-10">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+<div class="stat-item">
+<div class="text-secondary font-display-lg text-display-lg mb-2" data-target="500">500+</div>
+<div class="font-label-md text-label-md tracking-widest uppercase opacity-80">Projects Completed</div>
+</div>
+<div class="stat-item">
+<div class="text-secondary font-display-lg text-display-lg mb-2" data-target="15">15+</div>
+<div class="font-label-md text-label-md tracking-widest uppercase opacity-80">Industries Served</div>
+</div>
+<div class="stat-item">
+<div class="text-secondary font-display-lg text-display-lg mb-2" data-target="1200">1200+</div>
+<div class="font-label-md text-label-md tracking-widest uppercase opacity-80">Systems Delivered</div>
+</div>
+<div class="stat-item">
+<div class="text-secondary font-display-lg text-display-lg mb-2" data-target="100">100%</div>
+<div class="font-label-md text-label-md tracking-widest uppercase opacity-80">Satisfied Clients</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-32 bg-white blueprint-bg">
+<div class="max-w-4xl mx-auto px-margin-mobile text-center">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-6">Ready to Automate Your Operations?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+                Partner with ProXimo Robotics &amp; Automation for innovative industrial automation and robotics solutions. Our team of expert engineers is ready to help you optimize your production.
+            </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all w-full sm:w-auto shadow-lg hover:shadow-primary/20">
+                    Contact Us
+                </button>
+<button class="border-2 border-primary text-primary px-10 py-5 rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-all w-full sm:w-auto">
+                    Explore Services
+                </button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="case-study-drilling-spm.html">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="case-study-plc-based-systems.html">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="case-study-leakage-testing-spm.html">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="case-study-welding-spm.html">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for Counter Animation
+        const stats = document.querySelectorAll('[data-target]');
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    const suffix = entry.target.innerText.includes('%') ? '%' : '+';
+                    let count = 0;
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+
+                    const updateCount = () => {
+                        count += increment;
+                        if (count < target) {
+                            entry.target.innerText = Math.floor(count) + suffix;
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            entry.target.innerText = target + suffix;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        stats.forEach(stat => observer.observe(stat));
+
+        // Filter active state toggle
+        const filterBtns = document.querySelectorAll('button.rounded-full');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active-filter'));
+                btn.classList.add('active-filter');
+            });
+        });
+    </script>
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

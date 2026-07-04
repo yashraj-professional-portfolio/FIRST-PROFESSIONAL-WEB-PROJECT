@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PROXIMO | Next to Innovation - Robotics &amp; Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#667186",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "secondary-fixed": "#ffdbc8",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-container": "#f2f5ff",
+                    "primary-container": "#1e73be",
+                    "surface-bright": "#f7f9fb",
+                    "on-surface": "#191c1e",
+                    "on-primary-fixed": "#001c37",
+                    "primary": "#005a9c",
+                    "inverse-primary": "#a0c9ff",
+                    "on-secondary-fixed": "#321300",
+                    "surface-container": "#eceef0",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#743400",
+                    "on-surface-variant": "#414751",
+                    "secondary-container": "#ff8429",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#0061a6",
+                    "on-secondary-container": "#632c00",
+                    "on-error-container": "#93000a",
+                    "surface": "#f7f9fb",
+                    "primary-fixed-dim": "#a0c9ff",
+                    "status-warning": "#F59E0B",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-fixed-dim": "#bcc7de",
+                    "secondary": "#994700",
+                    "on-background": "#191c1e",
+                    "on-primary-fixed-variant": "#00497f",
+                    "surface-container-high": "#e6e8ea",
+                    "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                    "tertiary-fixed": "#d8e3fb",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "background": "#f7f9fb",
+                    "tertiary": "#4e596d",
+                    "status-error": "#EF4444",
+                    "outline": "#717782",
+                    "status-success": "#10B981",
+                    "outline-variant": "#c1c7d3",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#d2e4ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#111c2d",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#f4f6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "container-max-width": "1280px",
+                    "gutter-desktop": "24px",
+                    "margin-mobile": "20px",
+                    "gutter-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, rgba(30, 115, 190, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 115, 190, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .infinite-scroll {
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .cta-gradient {
+            background: linear-gradient(135deg, #1E73BE 0%, #F47C20 100%);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 49, 127, 0.7), rgba(0, 49, 127, 0.4));
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md blueprint-bg min-h-screen">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<!-- 3. HERO IMAGE SLIDER -->
+<section class="relative h-[80vh] overflow-hidden transition-all duration-1000 opacity-100 translate-y-0">
+<div class="absolute inset-0 w-full h-full">
+<img class="w-full h-full object-cover" data-alt="A high-tech industrial assembly line featuring precision robotic arms moving in a synchronized sequence. The environment is a pristine modern factory with high-key lighting reflecting off metallic surfaces and polished concrete floors. Soft blue and white tones dominate the scene, creating a sophisticated engineering atmosphere that emphasizes clarity and advanced technological innovation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXG1iLTyRpSGVMdT_JNQDuNbwmaDlmHsC2hEVY8nhuAhUOBioKlz5LRzILD87_DeUh_XLNEaGFa_iC2XWjlcaJgwSZg61JgN0ttLrSjGJ1-bUfhVmcZvpHCGhXcRXoskCQ1Rpt0rcsMnYdpupH9ZgVmL-U_4eeASryAURSRWmd1E1e46u-UzRMbF3FQnv_z2AgrBigbQ7dbxi2Dvg_Jwz_s5hOWwUHlZtKmSkKQ9UlPOqfOxMY-V8SElfm1EMtvz61JtfwnM27b5lX">
+<div class="absolute inset-0 hero-overlay flex items-center justify-center text-center px-margin-mobile">
+<div class="max-w-4xl animate-fade-in-up">
+<h1 class="font-display-lg text-white mb-6 leading-tight text-6xl">Transforming Industries Through Smart Automation</h1>
+<p class="font-body-lg text-white/90 mb-10 max-w-2xl mx-auto text-xl">Advanced PLC Automation, Robotics, Industrial IoT and Smart Manufacturing Solutions for the next generation of global engineering excellence.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:translate-y-[-2px]">
+                            Explore Solutions
+                        </button>
+<button class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg font-bold transition-all">
+                            Contact Us
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. COMPANY INTRODUCTION -->
+<section class="py-24 px-margin-desktop max-w-container-max-width mx-auto transition-all duration-1000 opacity-100 translate-y-0">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-block px-4 py-1 bg-primary/10 text-primary font-label-md rounded-full">ESTABLISHED EXCELLENCE</div>
+<h2 class="font-headline-lg text-on-surface text-5xl">Welcome to Proximo Robotics &amp; Automation</h2>
+<p class="font-body-lg text-on-surface-variant leading-relaxed text-xl">
+                    At Proximo, we redefine the boundaries of industrial efficiency through cutting-edge engineering. We provide comprehensive, end-to-end solutions in robotics, industrial automation, and the Internet of Things (IoT). Our mission is to empower manufacturers with the precision and intelligence required to thrive in the Industry 4.0 era.
+                </p>
+<div class="grid grid-cols-2 gap-4 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">Custom Engineering</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">24/7 Remote Support</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">IoT Integration</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">Scalable Systems</span>
+</div>
+</div>
+<button class="bg-[#1E73BE] text-white px-8 py-4 rounded-lg font-bold hover:shadow-lg transition-all">
+                    Learn More About Us
+                </button>
+</div>
+<div class="relative group cursor-pointer">
+<div class="absolute inset-0 bg-primary/20 rounded-xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
+<div class="relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-blueprint-line">
+<video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="video/WhatsApp%20Video%202026-06-12%20at%2011.01.27%20AM.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. OUR CORE EXPERTISE -->
+<section class="py-24 bg-surface-container-low px-margin-desktop transition-all duration-1000 opacity-100 translate-y-0">
+<div class="max-w-container-max-width mx-auto">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline-lg text-on-surface text-5xl">Our Core Expertise</h2>
+<div class="w-20 h-1.5 bg-[#F47C20] mx-auto rounded-full"></div>
+<p class="max-w-2xl mx-auto font-body-md text-on-surface-variant text-lg">We deliver precision-engineered solutions tailored to solve complex manufacturing challenges.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+<!-- Card 1 -->
+<div class="group bg-white p-8 rounded-xl border border-blueprint-line shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-4xl">settings_input_component</span>
+</div>
+<h3 class="font-headline-md mb-4 text-on-surface text-3xl">PLC Automation</h3>
+<p class="font-body-md text-on-surface-variant mb-6 text-lg">Expert logic design and control systems implementation for seamless industrial operations and maximum uptime.</p>
+<ul class="space-y-3 font-label-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">circle</span>Siemens &amp; Rockwell Systems</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">circle</span>Process Optimization</li>
+</ul>
+</div>
+<!-- Card 2 -->
+<div class="group glass-panel p-8 rounded-xl border border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform scale-105 z-10">
+<div class="w-16 h-16 bg-[#F47C20]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#F47C20] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-4xl">precision_manufacturing</span>
+</div>
+<h3 class="font-headline-md mb-4 text-on-surface text-3xl">Robotics</h3>
+<p class="font-body-md text-on-surface-variant mb-6 text-lg">Innovative robotic arm integration and programming for high-speed assembly, pick-and-place, and precision tasks.</p>
+<ul class="space-y-3 font-label-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">circle</span>Collaborative Robots (Cobots)</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">circle</span>End-of-Arm Tooling</li>
+</ul>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white p-8 rounded-xl border border-blueprint-line shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-4xl">sensors</span>
+</div>
+<h3 class="font-headline-md mb-4 text-on-surface text-3xl">Industrial IoT</h3>
+<p class="font-body-md text-on-surface-variant mb-6 text-lg">Data-driven insights through interconnected sensor networks and cloud-based predictive maintenance systems.</p>
+<ul class="space-y-3 font-label-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">circle</span>Real-time Monitoring</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">circle</span>Cloud Data Analytics</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. OUR CLIENTS -->
+<section class="py-20 bg-white overflow-hidden transition-all duration-1000 opacity-100 translate-y-0">
+<div class="max-w-container-max-width mx-auto px-margin-desktop mb-12 text-center">
+<h4 class="font-headline-md text-on-surface tracking-widest uppercase text-center text-4xl font-bold">Trusted by Global Leaders</h4>
+<p class="font-body-md text-on-surface-variant mt-4 text-xl font-bold">Partnering with industry pioneers to deliver world-class automation solutions.</p></div>
+<div class="relative flex overflow-hidden"><div class="flex infinite-scroll whitespace-nowrap items-center py-4"><div class="flex items-center space-x-24 shrink-0 mx-12"><img alt="Sharda Motor" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkeP-3azvbyhu8duvB0ssu_e0lD2UdBeAV5WHH-2-uFboyB6Lzs4y-dM1PajLIiuFaapo3LAj5bNs9iJN6KN_ePF9R4Q6rrnmWLdkFKb9gLMPb6UlHD6QuBzucpFc_kR0bbwJkFPOdKgCRUEIUOz5CvPKd-HUb8ojTWgK-AxM1y0osLuLjOXlVApf9n-FtPPp1JuNrI44lxnwc5QxjrqDkDdDSrWRVv3EECd8QCItfphdCGqHMvFJ7p5HEKrHH9-zyZr8N5QI9rPmY"><img alt="Wayzon" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNAAfFGS3ACTK6DsRE9IMctnLggr3AhmFW8j9_y_ubATcMEDhxDjMhNko4Io9W2SA2d0hFZetzfuajp_NsrlpRfM7QfAVYuuk9e3-94HRA94WM0UNncJ8S2x71IhAcGJLLvFBPr8wB_MH55JIw5d3zawbHWc57tTcsI13dDkVJAZmlO9Wpt5-IxgQOp_fwa6-WmOGuuTLyHHPKdnt_QL7EqrKX5omKWlndalxI_HUZ9-LKhPSciiX-nSFPD3H2mi20u4cjlS82q09o"><img alt="Rucha" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKf55bhfuS8VdSW-8Ymt9XchNxGBMo0bnmRxA-h1TP9uf5tXc9j8HXd38nE9VCJd9jEqw_p1zsk9XapVwS6e7k8j4hCiKD39Nx1EeItYreC7_hqUPIffa-eEFcgfQ3nkmtwYv6eOtV1l-5vGBGgzE4eH0Pp1ZYY3L73i8q6klRSbI1-OTI6VUEA2MXBrvYGtCmxZmr48UASO-b_H2tu8_iCjsLHDDLrgc8xRE7zrsDRyaSUdoNvJYFiuAvin6uw2zkYSBAmRGJObDl"><img alt="Lumax" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgnKUMTQdS9rIeP__No_faqjbDX3pYfDlCwgwLaDfHMOWXlsVNCojuBzGznM9cjxK9DnFGPPKrkMJ3sKEbNPXYG8LMx4Gstu-NDnlOQlnUcJ9_uiW8hxaYS3LEyPmYc-uRhnrjjJHZtEDqN21HZX2lRadftdXy9ahLp5fxUEMTNBJIck9f2yT89ujKAVQ6COk-5_sCkbj6d6fIroZbwLtWQEQn0xSzc_PU_XR8hmg6ERiIFWY_2Gxg7yvAGQ30PGfPmu0X_qXU1zsh"><img alt="Yantrik" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG4Y0N10Vd8f2TcnDqnBusb-EAcUqHohsKfx3gQup3nGATIbsOiPQZFC80TGWpChP3nAJ6ZY0bZ6OtpVlTh9v-xYWsaCW-Hjr0unDf2TdeLgfHNZCnkKslWg8PQT-3in56qKtWYlydmcXAHr15Jwu_Js6K8-dwsOWuE_2X2RCtzVyB3dAVUM-kdrmCUJmsByVcromEE6Vkn68-dPt-Ajx-AZbmLPAivVuXcPJqfbcpX7g2dhL_MaH4hE-Lfs5KpU2D6Jov_ogvSct3"><img alt="Denyo" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFFzoP2acePU08qiTYwoyLSkazDAOiYJbKwqhg0SqOd3z0pz9GtW8XpumTvYL3Qx9x6WL-K7LGU2m7quyoGkR3w2F-MjNZrtCawvbfGmmicKEyYfHXnFEseQRPJ_ugJ7fk_PJGK0LqCEhO64s6oZJAXceihodkiKP9nt-0wL2ldryX815s6ErtKw4vxyG-qSfAr6i0uuO-woRFYZfbK52dNDekMXuN5sSQzcCfQFOrB6LGmOIXokRRLwluE-6taoP6aojJDhPOpfT5"></div><div class="flex items-center space-x-24 shrink-0 mx-12"><img alt="Sharda Motor" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkeP-3azvbyhu8duvB0ssu_e0lD2UdBeAV5WHH-2-uFboyB6Lzs4y-dM1PajLIiuFaapo3LAj5bNs9iJN6KN_ePF9R4Q6rrnmWLdkFKb9gLMPb6UlHD6QuBzucpFc_kR0bbwJkFPOdKgCRUEIUOz5CvPKd-HUb8ojTWgK-AxM1y0osLuLjOXlVApf9n-FtPPp1JuNrI44lxnwc5QxjrqDkDdDSrWRVv3EECd8QCItfphdCGqHMvFJ7p5HEKrHH9-zyZr8N5QI9rPmY"><img alt="Wayzon" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNAAfFGS3ACTK6DsRE9IMctnLggr3AhmFW8j9_y_ubATcMEDhxDjMhNko4Io9W2SA2d0hFZetzfuajp_NsrlpRfM7QfAVYuuk9e3-94HRA94WM0UNncJ8S2x71IhAcGJLLvFBPr8wB_MH55JIw5d3zawbHWc57tTcsI13dDkVJAZmlO9Wpt5-IxgQOp_fwa6-WmOGuuTLyHHPKdnt_QL7EqrKX5omKWlndalxI_HUZ9-LKhPSciiX-nSFPD3H2mi20u4cjlS82q09o"><img alt="Rucha" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKf55bhfuS8VdSW-8Ymt9XchNxGBMo0bnmRxA-h1TP9uf5tXc9j8HXd38nE9VCJd9jEqw_p1zsk9XapVwS6e7k8j4hCiKD39Nx1EeItYreC7_hqUPIffa-eEFcgfQ3nkmtwYv6eOtV1l-5vGBGgzE4eH0Pp1ZYY3L73i8q6klRSbI1-OTI6VUEA2MXBrvYGtCmxZmr48UASO-b_H2tu8_iCjsLHDDLrgc8xRE7zrsDRyaSUdoNvJYFiuAvin6uw2zkYSBAmRGJObDl"><img alt="Lumax" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgnKUMTQdS9rIeP__No_faqjbDX3pYfDlCwgwLaDfHMOWXlsVNCojuBzGznM9cjxK9DnFGPPKrkMJ3sKEbNPXYG8LMx4Gstu-NDnlOQlnUcJ9_uiW8hxaYS3LEyPmYc-uRhnrjjJHZtEDqN21HZX2lRadftdXy9ahLp5fxUEMTNBJIck9f2yT89ujKAVQ6COk-5_sCkbj6d6fIroZbwLtWQEQn0xSzc_PU_XR8hmg6ERiIFWY_2Gxg7yvAGQ30PGfPmu0X_qXU1zsh"><img alt="Yantrik" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG4Y0N10Vd8f2TcnDqnBusb-EAcUqHohsKfx3gQup3nGATIbsOiPQZFC80TGWpChP3nAJ6ZY0bZ6OtpVlTh9v-xYWsaCW-Hjr0unDf2TdeLgfHNZCnkKslWg8PQT-3in56qKtWYlydmcXAHr15Jwu_Js6K8-dwsOWuE_2X2RCtzVyB3dAVUM-kdrmCUJmsByVcromEE6Vkn68-dPt-Ajx-AZbmLPAivVuXcPJqfbcpX7g2dhL_MaH4hE-Lfs5KpU2D6Jov_ogvSct3"><img alt="Denyo" class="h-16 md:h-20 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFFzoP2acePU08qiTYwoyLSkazDAOiYJbKwqhg0SqOd3z0pz9GtW8XpumTvYL3Qx9x6WL-K7LGU2m7quyoGkR3w2F-MjNZrtCawvbfGmmicKEyYfHXnFEseQRPJ_ugJ7fk_PJGK0LqCEhO64s6oZJAXceihodkiKP9nt-0wL2ldryX815s6ErtKw4vxyG-qSfAr6i0uuO-woRFYZfbK52dNDekMXuN5sSQzcCfQFOrB6LGmOIXokRRLwluE-6taoP6aojJDhPOpfT5"></div></div></div>
+</section>
+<!-- 7. CALL TO ACTION -->
+<section class="cta-gradient py-24 text-center px-margin-desktop transition-all duration-1000 opacity-100 translate-y-0">
+<div class="max-w-4xl mx-auto space-y-8">
+<h2 class="font-display-lg text-white text-5xl">Ready to Automate Your Operations?</h2>
+<p class="font-body-lg text-white/90 text-xl">Join the industrial revolution and scale your manufacturing with our expert solutions.</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center pt-4">
+<button class="bg-white text-primary px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/90 hover:scale-105 transition-all shadow-xl">
+                    Request Demo
+                </button>
+<button class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/10 hover:scale-105 transition-all">
+                    Contact Us
+                </button>
+</div>
+</div>
+</section>
+<!-- 8. FOOTER -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="services.html">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="services.html">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="services.html">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="services.html">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for Fade-in effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        // Apply scroll animations to major sections
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+
+
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

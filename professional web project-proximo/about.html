@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About Us | PROXIMO Robotics &amp; Automation</title>
+<meta content="Learn about ProXimo Robotics &amp; Automation, leaders in industrial automation, robotics, and Industry 4.0 solutions in Pune." name="description">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Shared Style Guidance Mapping -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed-variant": "#00497f",
+                "on-tertiary-fixed": "#111c2d",
+                "outline-variant": "#c1c7d3",
+                "surface-tint": "#0061a6",
+                "error": "#ba1a1a",
+                "outline": "#717782",
+                "secondary-fixed-dim": "#ffb68b",
+                "on-primary-container": "#f2f5ff",
+                "background": "#f7f9fb",
+                "primary": "#005a9c",
+                "on-secondary-container": "#632c00",
+                "tertiary-container": "#667186",
+                "surface-container-low": "#f2f4f6",
+                "secondary": "#994700",
+                "primary-fixed": "#d2e4ff",
+                "surface-container-high": "#e6e8ea",
+                "on-secondary-fixed": "#321300",
+                "surface-container-highest": "#e0e3e5",
+                "on-background": "#191c1e",
+                "on-tertiary-container": "#f4f6ff",
+                "surface-bright": "#f7f9fb",
+                "surface-container": "#eceef0",
+                "on-error-container": "#93000a",
+                "on-secondary": "#ffffff",
+                "inverse-on-surface": "#eff1f3",
+                "primary-container": "#1e73be",
+                "surface-dim": "#d8dadc",
+                "primary-fixed-dim": "#a0c9ff",
+                "tertiary-fixed": "#d8e3fb",
+                "secondary-fixed": "#ffdbc8",
+                "surface": "#f7f9fb",
+                "on-secondary-fixed-variant": "#743400",
+                "status-success": "#10B981",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed-variant": "#3c475a",
+                "on-tertiary": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#bcc7de",
+                "inverse-primary": "#a0c9ff",
+                "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                "on-surface": "#191c1e",
+                "on-primary": "#ffffff",
+                "status-error": "#EF4444",
+                "secondary-container": "#ff8429",
+                "surface-variant": "#e0e3e5",
+                "tertiary": "#4e596d",
+                "inverse-surface": "#2d3133",
+                "status-warning": "#F59E0B",
+                "on-surface-variant": "#414751",
+                "on-primary-fixed": "#001c37",
+                "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "unit": "8px",
+                "gutter-mobile": "16px",
+                "container-max-width": "1280px",
+                "gutter-desktop": "24px",
+                "margin-mobile": "20px",
+                "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                "headline-md": ["Montserrat"],
+                "body-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "display-lg": ["Montserrat"],
+                "label-md": ["Inter"],
+                "headline-lg-mobile": ["Montserrat"],
+                "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: radial-gradient(var(--blueprint-line) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md blueprint-grid min-h-screen">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<!-- Hero Banner -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Industrial Automation Background" class="w-full h-full object-cover" data-alt="A sophisticated industrial automation environment showcasing advanced robotic arms and high-tech control panels in a clean manufacturing facility. The scene is illuminated with cool blue and white professional lighting, emphasizing technical precision and modern engineering. The atmosphere is professional, sleek, and highly efficient, capturing the essence of Industry 4.0 innovation and corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUzhgtE8oBJkgxDoaYZzdH_81o9k1USjd-0MJ28oSQ83oPER6-YNg2jSKo9bI9FLCKj3LosgjSTLwScdlLDvCNh41Vc64WWYqX-2XFz2wcpgoOO7SOykfnzityht7sh62ZPoCu4GBVIhAthMXQr1PDJlbfoan_Pt81aUgwtCHzEK1MZCHdAkMoqGPpjSdHHwZvTf3HjRZMH1N2gsTVN4rkCO3jn_5jN_FO9fJ9wqzPCkm2ktQbHagPxT_AGp5HOP04WvT3PMTZuHDK">
+<div class="absolute inset-0 bg-primary/60 backdrop-brightness-50"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile max-w-4xl mx-auto fade-in-up visible">
+<h1 class="font-display-lg text-4xl md:text-display-lg text-white mb-6 uppercase tracking-tight">About ProXimo Robotics &amp; Automation</h1>
+<p class="font-body-lg text-white/90 max-w-2xl mx-auto">
+                Delivering innovative industrial automation, robotics, and smart manufacturing solutions that empower industries to achieve greater efficiency, productivity, and growth.
+            </p>
+</div>
+</section>
+<!-- Our Story -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="fade-in-up visible">
+<span class="text-primary font-label-md uppercase tracking-widest mb-4 block">Our Journey</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Engineering a Digital Future from Pune</h2>
+<div class="space-y-6 text-on-surface-variant font-body-md leading-relaxed">
+<p class="">Founded in Pune, ProXimo Robotics &amp; Automation was established with a vision to help industries embrace automation and digital transformation.</p>
+<p class="">Through innovative engineering and customer-focused solutions, we provide advanced automation systems, robotics integration, PLC programming, control panel solutions, and Industry 4.0 technologies that enhance manufacturing performance.</p>
+</div>
+</div>
+<div class="relative rounded-lg overflow-hidden shadow-xl fade-in-up visible">
+<img alt="Pune Office and Engineering Hub" class="w-full aspect-video object-cover" data-alt="A bright, modern engineering design studio where a diverse team of professional engineers is collaborating on advanced industrial robotics schematics. Large windows overlook a clean Pune landscape, and the room is filled with high-resolution monitors and technical diagrams. The style is clean, corporate modern, with a professional blue and gray color palette that evokes high-end architectural depth and technical excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVB_Jsb-OMPrP12aaz9Ghkt7MoIger9-j8j1aVfteQFDaWS4H0HlagV0mTrnlQE_78iL1ehlNLx_A0ezuwzQBHf96MlIRDYWWqTYHIm4FBxcqs7Kgdy4cpwfykFNPHmlwPLS2cJCbMWKwKwTYJBmeSVoALyywbUyPh0y-oeoaKzMerDiQ4vX_EpxPP2v6p_dmMxRyl0yoCv7ZLtwFqub3MKLhEE14rB1NuKp61Jqd3eEyH_o-iem_BORn61D5ZtJFygFksTLXbZ5PR">
+<div class="absolute inset-0 border border-primary/10"></div>
+</div>
+</div>
+</section><section class="py-24 bg-surface-container-low border-y border-blueprint-line">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-16 fade-in-up visible">
+<span class="text-primary font-label-md uppercase tracking-widest mb-2 block">Our Team</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Leadership</h2>
+</div>
+<div class="max-w-4xl mx-auto">
+<div class="glass-panel flex flex-col md:flex-row items-center gap-8 p-8 md:p-12 border border-primary/5 rounded-lg shadow-xl fade-in-up visible">
+<div class="w-48 h-48 flex-shrink-0 rounded-full overflow-hidden border-4 border-white shadow-md">
+<img alt="Anand Ghule" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVWJ6xK3VRHZznQbKc9fAmXcV4dYa3jysVvTXccEgaEafnUw-ECNXbogjxvNSnIo5drVwK3caH8E96ZR68GFg6_qC5h1SNwWmkIGUqs6oPMOYO8eMdUOlTDu9wNQ9II7D7UnE0tSuePdu-gsWHc-Ut0U8IgeRNrzTq621GmZr-B22GsW-ta8sWkFa8jhhOIscqedgcC9UcDSVNgpBKe6IedBjBYjpJrhAE-BhrMYQxf5LSNrhnsGfdFERLLkaAOePhNI_0__DCCjBj">
+</div>
+<div class="text-center md:text-left">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Anand Ghule</h3>
+<p class="text-primary font-label-md uppercase tracking-wider mb-4">Founder &amp; Director</p>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+            Leading ProXimo Robotics &amp; Automation with a vision of delivering advanced automation and robotic solutions that help industries achieve operational excellence and digital transformation.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission & Vision -->
+<section class="py-16 bg-surface-container-lowest">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter-desktop">
+<!-- Mission -->
+<div class="glass-panel p-10 border border-primary/5 rounded-lg shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined text-3xl">track_changes</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Our Mission</h3>
+<p class="text-on-surface-variant font-body-md italic">"To provide reliable, innovative, and efficient automation solutions that help industries optimize operations and achieve sustainable growth."</p>
+</div>
+<!-- Vision -->
+<div class="glass-panel p-10 border border-primary/5 rounded-lg shadow-sm hover:shadow-md transition-shadow fade-in-up visible" style="transition-delay: 100ms;">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined text-3xl">visibility</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Our Vision</h3>
+<p class="text-on-surface-variant font-body-md italic">"To become a leading industrial automation and robotics company recognized for engineering excellence, innovation, and customer success."</p>
+</div>
+</div>
+</section>
+<!-- What We Do -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-16 fade-in-up visible">
+<span class="text-primary font-label-md uppercase tracking-widest mb-2 block">Our Expertise</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Integrated Industrial Solutions</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Services iterate -->
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">precision_manufacturing</span></div>
+<h4 class="font-label-md text-label-md mb-2">Industrial Automation</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">smart_toy</span></div>
+<h4 class="font-label-md text-label-md mb-2">Robotics Integration</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">memory</span></div>
+<h4 class="font-label-md text-label-md mb-2">PLC Programming</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">monitoring</span></div>
+<h4 class="font-label-md text-label-md mb-2">HMI &amp; SCADA Development</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">settings_input_component</span></div>
+<h4 class="font-label-md text-label-md mb-2">Control Panel Design</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">factory</span></div>
+<h4 class="font-label-md text-label-md mb-2">Industry 4.0 Solutions</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">hub</span></div>
+<h4 class="font-label-md text-label-md mb-2">Smart Manufacturing</h4>
+</div>
+<div class="group bg-white p-6 rounded-lg border border-outline-variant hover:border-primary transition-all duration-300 fade-in-up visible">
+<div class="text-primary mb-4 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-4xl">sensors</span></div>
+<h4 class="font-label-md text-label-md mb-2">Industrial IoT Integration</h4>
+</div>
+</div>
+</section>
+<!-- Why Choose ProXimo -->
+<section class="py-24 bg-primary text-on-primary">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<h2 class="font-headline-lg text-headline-lg mb-16 text-center fade-in-up visible">Why Choose ProXimo</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">engineering</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">Experienced Engineering Team</h4>
+<p class="text-white/70 font-body-md">Highly skilled professionals dedicated to solving complex automation challenges.</p>
+</div>
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">tune</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">Customized Solutions</h4>
+<p class="text-white/70 font-body-md">Bespoke systems designed specifically for your facility's unique operational needs.</p>
+</div>
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">task_alt</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">End-to-End Execution</h4>
+<p class="text-white/70 font-body-md">From conceptual design and programming to installation and post-launch support.</p>
+</div>
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">verified</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">Quality &amp; Reliability</h4>
+<p class="text-white/70 font-body-md">Engineering precision that ensures durable, long-term operational success.</p>
+</div>
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">lan</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">Industry 4.0 Expertise</h4>
+<p class="text-white/70 font-body-md">Future-proofing your business with cutting-edge digital transformation tools.</p>
+</div>
+<div class="p-8 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-all fade-in-up visible">
+<span class="material-symbols-outlined text-3xl mb-4 text-secondary-container">support_agent</span>
+<h4 class="font-label-md text-label-md mb-2 uppercase tracking-wide">Dedicated Support</h4>
+<p class="text-white/70 font-body-md">Consistent technical assistance to keep your systems running at peak performance.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Company Highlights / Stats -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+<div class="fade-in-up visible">
+<div class="text-primary font-display-lg text-4xl mb-2 counter visible" data-target="2020">2020</div>
+<div class="font-label-md text-on-surface-variant uppercase text-xs">Founded In</div>
+</div>
+<div class="fade-in-up visible" style="transition-delay: 100ms;">
+<div class="text-primary font-display-lg text-4xl mb-2 counter visible" data-target="150">150</div>
+<div class="font-label-md text-on-surface-variant uppercase text-xs">Projects Delivered</div>
+</div>
+<div class="fade-in-up visible" style="transition-delay: 200ms;">
+<div class="text-primary font-display-lg text-4xl mb-2 counter visible" data-target="12">12</div>
+<div class="font-label-md text-on-surface-variant uppercase text-xs">Industries Served</div>
+</div>
+<div class="fade-in-up visible" style="transition-delay: 300ms;">
+<div class="text-primary font-display-lg text-4xl mb-2 counter visible" data-target="45">45</div>
+<div class="font-label-md text-on-surface-variant uppercase text-xs">Skilled Engineers</div>
+</div>
+<div class="fade-in-up visible" style="transition-delay: 400ms;">
+<div class="text-primary font-display-lg text-4xl mb-2 counter visible" data-target="98">98</div>
+<div class="font-label-md text-on-surface-variant uppercase text-xs">Client Satisfaction %</div>
+</div>
+</div>
+</section>
+<!-- Our Values -->
+<section class="py-24 bg-surface-container-low border-y border-blueprint-line">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="text-center mb-16 fade-in-up visible">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Values We Engineer By</h2>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-6 gap-6">
+<!-- Value Cards -->
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">lightbulb</span>
+<h5 class="font-label-md text-label-md">Innovation</h5>
+</div>
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">gavel</span>
+<h5 class="font-label-md text-label-md">Integrity</h5>
+</div>
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">verified</span>
+<h5 class="font-label-md text-label-md">Quality</h5>
+</div>
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">handshake</span>
+<h5 class="font-label-md text-label-md">Customer</h5>
+</div>
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">star</span>
+<h5 class="font-label-md text-label-md">Excellence</h5>
+</div>
+<div class="bg-white p-8 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow fade-in-up visible">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">update</span>
+<h5 class="font-label-md text-label-md">Growth</h5>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="bg-primary p-12 md:p-20 rounded-xl relative overflow-hidden shadow-2xl fade-in-up visible">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[300px] absolute -right-20 -top-20">precision_manufacturing</span>
+</div>
+<div class="relative z-10 max-w-2xl">
+<h2 class="font-headline-lg text-headline-lg text-white mb-6">Let's Build the Future of Automation Together</h2>
+<p class="text-white/80 font-body-lg mb-10">Partner with ProXimo Robotics &amp; Automation to transform your manufacturing operations with innovative automation and robotics solutions.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-white text-primary font-label-md text-label-md px-10 py-4 rounded hover:bg-secondary-fixed transition-colors">CONTACT US</button>
+<button class="border border-white text-white font-label-md text-label-md px-10 py-4 rounded hover:bg-white/10 transition-colors">EXPLORE SOLUTIONS</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Start counter if it's a counter element
+                    if(entry.target.classList.contains('counter')) {
+                        startCounter(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up, .counter').forEach(el => observer.observe(el));
+
+        // Animated Counters
+        function startCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            let count = 0;
+            const duration = 2000;
+            const increment = target / (duration / 16);
+
+            const updateCount = () => {
+                count += increment;
+                if (count < target) {
+                    el.innerText = Math.ceil(count);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    el.innerText = target;
+                }
+            };
+            updateCount();
+        }
+    </script>
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

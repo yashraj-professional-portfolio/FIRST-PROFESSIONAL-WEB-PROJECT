@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PLC Based Systems & Control panels | Proximo Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffdbc8",
+                    "tertiary-container": "#667186",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary-container": "#632c00",
+                    "background": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "inverse-primary": "#a0c9ff",
+                    "outline": "#717782",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#d8e3fb",
+                    "on-primary": "#ffffff",
+                    "secondary": "#994700",
+                    "status-error": "#EF4444",
+                    "on-secondary-fixed": "#321300",
+                    "on-tertiary-container": "#f4f6ff",
+                    "tertiary-fixed-dim": "#bcc7de",
+                    "status-success": "#10B981",
+                    "on-primary-container": "#f2f5ff",
+                    "on-surface": "#191c1e",
+                    "on-surface-variant": "#414751",
+                    "surface-variant": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#743400",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "surface-bright": "#f7f9fb",
+                    "surface-tint": "#0061a6",
+                    "primary-fixed-dim": "#a0c9ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001c37",
+                    "on-tertiary-fixed": "#111c2d",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#ff8429",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "status-warning": "#F59E0B",
+                    "primary-fixed": "#d2e4ff",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "outline-variant": "#c1c7d3",
+                    "on-error": "#ffffff",
+                    "primary": "#005a9c",
+                    "surface-container": "#eceef0",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#4e596d",
+                    "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#1e73be",
+                    "on-primary-fixed-variant": "#00497f",
+                    "surface-container-high": "#e6e8ea",
+                    "inverse-on-surface": "#eff1f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "gutter-desktop": "24px",
+                    "margin-mobile": "20px",
+                    "gutter-mobile": "16px",
+                    "container-max-width": "1280px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-bg {
+            background-image: linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #005a9c 0%, #1e73be 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .comparison-slider {
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+        .comparison-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #ff8429;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md blueprint-bg" data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-delay="0">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<button class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all">
+                REQUEST DEMO
+            </button>
+</div>
+</header>
+<main class="pt-[120px]"> <!-- Adjusted for top bar + header -->
+<!-- Breadcrumb -->
+<div class="max-w-container-max-width mx-auto px-gutter-desktop py-4">
+<nav aria-label="Breadcrumb" class="flex text-label-sm font-label-sm text-outline">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="hover:text-primary" href="#">Home</a>
+</li>
+<li class="">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-2">chevron_right</span>
+<a class="hover:text-primary" href="#">Products</a>
+</div>
+</li>
+<li aria-current="page" class="">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-2">chevron_right</span>
+<span class="text-primary font-bold">PLC Based Systems & Control panels</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+<!-- Hero Section -->
+<section class="relative h-[716px] flex items-center overflow-hidden bg-primary text-white">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/40 z-10"></div>
+<img alt="Smart Factory Background" class="w-full h-full object-cover" data-alt="A sophisticated industrial setting featuring high-end CNC machining centers and advanced robotic arms in a clean, modern manufacturing facility. The atmosphere is professional and technologically advanced, with soft cool-toned lighting reflecting off metallic surfaces of precision engineering equipment. The scene conveys reliability and Industry 4.0 innovation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVeMwmMzuKqDsVkYOsdUZbLDygSG7_hl3OC892OmAywH463fZma1kiINdgGPBjpx3GA0lji72IUd5NqaWKMI3KChRGMdi_MMtadMF-y3-xidKqdUAeFl02IzoQh1tWdlrFHo-1LwklfNtA1zTt_lB2lEf8HtOMlHbVcWKUzqb-JSaNVsTQbEZ-QpAQSesI4M3SmN1XC6dWK-Cn3E54KzuWSjcxZdJNRnCsRiWvjzPx2vQYjwCuHEjhtuDtna5kjffwow1H0uBHCzU">
+</div>
+<div class="relative z-20 max-w-container-max-width mx-auto px-gutter-desktop w-full">
+<div class="max-w-2xl aos-init aos-animate" data-aos="fade-right">
+<h1 class="font-display-lg text-display-lg font-extrabold mb-4 leading-tight">PLC Based Systems & Control panels</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed mb-8 opacity-90">Advanced Central Control Cabinets & Intelligent Logic Automation. Engineered for mission-critical industrial applications.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-3 rounded-lg font-label-md flex items-center gap-2 hover:brightness-110 transition-all">
+                            View Technical Specifications
+                        </button>
+<button class="border-2 border-white/30 backdrop-blur-sm px-8 py-3 rounded-lg font-label-md hover:bg-white hover:text-primary transition-all">
+                            Request Consultation
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specifications Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="text-center mb-16 aos-init aos-animate" data-aos="fade-up">
+<h2 class="font-headline-lg text-headline-lg mb-4">Technical Specifications</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Uncompromising engineering precision for the most demanding industrial environments.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="relative group aos-init aos-animate" data-aos="fade-right">
+<div class="absolute -inset-4 bg-primary/5 rounded-2xl scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500"></div>
+<img alt="Close-up of a high-precision CNC drilling spindle in operation" class="rounded-2xl shadow-xl w-full h-auto relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDpXWLP9-W5UTGRd2tDLDXSfsLHMjM0JJ_XFYSenfHw-5PX0cOT-4LSDSF9HsNXooWmGLaMneYkUHWC3cM-CCTO0MMOErpgSAKPeqeuRhPL7tnn_9HwGRApVmpRZOptObw0zH_iF_WNHb1UWX_ELBHhs59yPtgNY_t66C2dhcPUAVamKakhmGhyuqjy3ybBPILeM1VMhaBfi3GKb2bAf4QPo9tY9IutbH6s53heenws3YSvPW82ACPSV4k-jhsR2X1pEZaY4EZZlw">
+</div>
+<div data-aos="fade-left" class="aos-init aos-animate">
+<div class="bg-white rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary/5">
+<th class="p-6 font-headline-md text-primary border-b border-outline-variant/20" colspan="2">Machine Parameters</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant/10 hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface w-1/2">Controller Model</td>
+<td class="p-5 text-on-surface-variant">Siemens S7-1500 / Allen-Bradley</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface">Total I/O Points</td>
+<td class="p-5 text-on-surface-variant">500+ Digital/Analog Channels</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface">Communication Bus</td>
+<td class="p-5 text-on-surface-variant">PROFINET / EtherNet/IP / Modbus</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface">Safety Rating</td>
+<td class="p-5 text-on-surface-variant">SIL 3 / PL e (Fail-safe architecture)</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface">HMI Panels</td>
+<td class="p-5 text-on-surface-variant">12-inch Unified Comfort Panel</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="p-5 font-bold text-on-surface">Power Supply</td>
+<td class="p-5 text-on-surface-variant">415V, 3 Phase, 50Hz</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Overview -->
+<section class="py-24 overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative aos-init aos-animate" data-aos="fade-right">
+<div class="absolute -top-8 -left-8 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative glass-panel p-4 rounded-2xl shadow-2xl overflow-hidden">
+<img alt="Machine Close-up" class="rounded-xl w-full h-auto grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close-up photograph of a heavy-duty industrial drilling spindle assembly. The machine components are made of polished stainless steel and cast iron, showing precision textures and technical details. Bright industrial workspace lighting creates sharp highlights and deep shadows, emphasizing the durability and engineering precision of the equipment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTayuyqzgm4PAVPToVpvo999ZKaMlSESwhJdp-C14DMIjbpoQRkLNpuUGenmkKBG1fSDYNaebZMWtyQWhO-lJ9SNdQ3OZBM1Xalg9yO_W6sQ13ro1-ChPAu0RnN00rolo481yRI_u8U78cuS3yHXzLyf57VtRh6gdPd_WXoq0C61fQYatRpMUDtGsFOfqdW5KKWD3hXGkKaPs4hWC76WEBfGYY1w4Cv1g5ybGxdLVQFQAgaeYGGQiZVAvq5WArLUt549iCiOlHezY">
+</div>
+</div>
+<div data-aos="fade-left" class="aos-init aos-animate">
+<span class="text-secondary font-label-md uppercase tracking-widest mb-2 block">Technical Overview</span>
+<h2 class="font-headline-lg text-headline-lg mb-6">Redefining Industrial Holemaking</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Our custom-engineered PLC automation systems act as the primary brain of manufacturing lines, coordinating high-speed sensor inputs and actuator outputs. Neatly organized control panels are built for extreme durability and clear operator diagnostics.</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="text-body-md">Centralized PLC cabinet layout with professional cable mapping and thermal control.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="text-body-md">Smart safety relay circuits matching international hazard standards.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="text-body-md">OPC-UA and MQTT telemetry communication protocols ready for IoT dashboarding.</span>
+</li>
+</ul>
+<div class="mt-10 p-6 bg-primary/5 border border-primary/10 rounded-xl flex items-center gap-6">
+<div class="h-12 w-12 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<p class="text-label-sm uppercase tracking-tighter text-on-surface-variant mb-1">Overall Equipment OEE</p>
+<p class="font-headline-md text-headline-md text-primary">OEE > 92%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Features (Animated Cards) -->
+<section class="py-24 bg-surface-container">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg">Core Capabilities</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">rebase_edit</span>
+<h3 class="font-headline-md text-headline-md mb-2">Multi-Spindle Drilling</h3>
+<p class="text-on-surface-variant">Simultaneous drilling operations on multiple axes to reduce total cycle time significantly.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">precision_manufacturing</span>
+<h3 class="font-headline-md text-headline-md mb-2">Servo Controlled Motion</h3>
+<p class="text-on-surface-variant">Micron-level positioning accuracy via high-torque brushless servo motors.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">settings_input_component</span>
+<h3 class="font-headline-md text-headline-md mb-2">Automatic Clamping</h3>
+<p class="text-on-surface-variant">Hydraulic or pneumatic workholding with feedback sensors to ensure zero slippage.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">memory</span>
+<h3 class="font-headline-md text-headline-md mb-2">PLC Based Automation</h3>
+<p class="text-on-surface-variant">Centralized control logic for seamless integration with upstream and downstream conveyors.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">monitoring</span>
+<h3 class="font-headline-md text-headline-md mb-2">Tool Wear Monitoring</h3>
+<p class="text-on-surface-variant">Acoustic and torque sensors detect tool degradation before failure occurs.</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 hover:border-primary hover:-translate-y-2 transition-all duration-300 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">hub</span>
+<h3 class="font-headline-md text-headline-md mb-2">Industry 4.0 Ready</h3>
+<p class="text-on-surface-variant">OPC-UA and MQTT support for real-time cloud data logging and remote diagnostics.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Performance Metrics -->
+<section class="py-24 bg-primary text-white relative overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop relative z-10">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+<div data-aos="zoom-in" class="aos-init aos-animate">
+<p class="font-display-lg text-display-lg font-extrabold text-secondary-fixed">0</p>
+<p class="font-label-md uppercase tracking-widest text-primary-fixed">Assembly Errors</p>
+</div>
+<div data-aos="zoom-in" data-aos-delay="100" class="aos-init aos-animate">
+<p class="font-display-lg text-display-lg font-extrabold text-secondary-fixed">35%</p>
+<p class="font-label-md uppercase tracking-widest text-primary-fixed">Safety Rating Reduction</p>
+</div>
+<div data-aos="zoom-in" data-aos-delay="200" class="aos-init aos-animate">
+<p class="font-display-lg text-display-lg font-extrabold text-secondary-fixed">99.9%</p>
+<p class="font-label-md uppercase tracking-widest text-primary-fixed">Logic Uptime Rate</p>
+</div>
+<div data-aos="zoom-in" data-aos-delay="300" class="aos-init aos-animate">
+<p class="font-display-lg text-display-lg font-extrabold text-secondary-fixed">30%</p>
+<p class="font-label-md uppercase tracking-widest text-primary-fixed">Cost Savings</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Working Principle -->
+<section class="py-24">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg">Automated Workflow</h2>
+</div>
+<div class="relative flex flex-col lg:flex-row justify-between items-center gap-8">
+<!-- Connection Line (Desktop) -->
+<div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-outline-variant/30 -z-10"></div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">input</span>
+</div>
+<span class="font-bold">Loading</span>
+</div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">waving_hand</span>
+</div>
+<span class="font-bold">Positioning</span>
+</div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">lock_open</span>
+</div>
+<span class="font-bold">Clamping</span>
+</div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-secondary flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">construction</span>
+</div>
+<span class="font-bold">Drilling</span>
+</div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<span class="font-bold">Verification</span>
+</div>
+<div class="flex flex-col items-center group aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">output</span>
+</div>
+<span class="font-bold">Unloading</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Section -->
+<section class="py-24 bg-surface-container-high overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div data-aos="fade-right" class="aos-init aos-animate">
+<h2 class="font-headline-lg text-headline-lg mb-6">Transition to Automation</h2>
+<p class="text-body-lg mb-8">See how the Proximo Drilling SPM transforms manual bottlenecks into high-precision throughput. Drag the slider to compare.</p>
+<div class="space-y-6">
+<div class="p-4 rounded border-l-4 border-outline-variant bg-surface-variant/50">
+<h4 class="font-bold text-outline uppercase text-xs mb-2">Manual Baseline</h4>
+<p class="text-sm">High rejection rates due to operator fatigue and imprecise jigging.</p>
+</div>
+<div class="p-4 rounded border-l-4 border-secondary bg-secondary-container/10">
+<h4 class="font-bold text-secondary uppercase text-xs mb-2">Proximo SPM Result</h4>
+<p class="text-sm">100% inspection through integrated vision, sub-micron repeatability, and 24/7 autonomous operation.</p>
+</div>
+</div>
+</div>
+<div class="comparison-slider rounded-2xl shadow-2xl h-[400px] border border-white/50 aos-init aos-animate" data-aos="fade-left">
+<!-- Before Image -->
+<div class="absolute inset-0">
+<img alt="Manual Drilling" class="w-full h-full object-cover brightness-50" data-alt="A dimly lit industrial workshop scene representing manual manufacturing. An old manual drill press sits in a cluttered workspace with metal shavings and hand tools scattered around. The lighting is harsh and uneven, conveying an atmosphere of labor-intensive and lower-precision traditional engineering processes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-17NsPusVnwFP0K-28hogjLECmG_4c33Nqn0w7nezLbaOs2GB9taxn0ojNdqcV2IhfooZT7KTte6bClt9c4aJ4bCHJFeo4yC4nCK-jlkeTYaOJrNzHr9H0PpxTSofyzPpIaap7HocX4r963rCtnpcdRw8EeayQgj9uKsdstQVjZeD0fkUFxWXZNfALqkj1CicX29ihHAobfoA2878-5Zrtp-zIwabiXkH04HjzUOuIk1Dw8Jq15nmyMqsd9gsfiOM2FGgO69nZjY">
+<div class="absolute bottom-4 left-4 glass-panel px-4 py-2 rounded text-xs font-bold uppercase">Manual Process</div>
+</div>
+<!-- After Image Overlay -->
+<div class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-secondary" id="after-image">
+<img alt="Automated Precision" class="absolute inset-0 w-[1280px] h-[400px] object-cover" data-alt="A pristine, high-tech automated industrial environment. A modern CNC robotic drilling system is captured in mid-operation, with cool LED lighting reflecting off clean white and silver surfaces. The scene is bright and orderly, showcasing technical excellence and high-precision automation with a clear, sharp aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjMhuQNt4Ki-fhjmLjJSeGInG3iEOGebaks47PzstcU0-aTxORC2-p3CgJ9_9c-rV4j_IgeMUsybC6-EuS1sHVxm_vLR-dfBsC-4he-SKpEesRZ_0wGmzlDzhzclASZ_G2c4unF6KTqO2AYcgqnSXAkdfm-HxAPd4-mVpeYalggAcWM_KxCqvONciZiHI2SsHwWGwb_fRDJKszFfRvyrEfqlrd7RvcJ5MMM2Xhbx9LKuWsFU5q2VpiQuFQ_VCtSgYrHYaxASyWg28">
+<div class="absolute bottom-4 left-4 glass-panel px-4 py-2 rounded text-xs font-bold uppercase text-secondary">Proximo Automation</div>
+</div>
+<!-- Handle -->
+<div class="comparison-handle flex items-center justify-center left-1/2 -translate-x-1/2" id="slider-handle">
+<div class="bg-secondary text-white rounded-full p-1 shadow-lg">
+<span class="material-symbols-outlined">unfold_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Client Success/Case Study -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max-width mx-auto px-gutter-desktop">
+<div class="glass-panel p-12 rounded-3xl border border-outline-variant/30 flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/3 text-center lg:text-left">
+<span class="text-primary font-bold mb-2 block">Case Study</span>
+<h2 class="font-headline-lg text-headline-lg mb-4">Precision for TechComponent Inc.</h2>
+<p class="text-on-surface-variant">How we optimized fuel precision component sorting & logistics for a global global electronics manufacturer.</p>
+<a href="case-studies.html" class="inline-flex items-center gap-2 mt-6 text-primary font-label-md hover:gap-3 transition-all">View Case Study <span class="material-symbols-outlined">arrow_forward</span></a></div>
+<div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 bg-surface rounded-xl border border-outline-variant/20">
+<p class="text-primary font-bold text-xl mb-2">Challenge</p>
+<p class="text-label-sm">Manual assembly parts mixing-up causing a 10% scrap rate and frequent rework.</p>
+</div>
+<div class="p-6 bg-surface rounded-xl border border-outline-variant/20">
+<p class="text-primary font-bold text-xl mb-2">Solution</p>
+<p class="text-label-sm">Smart pick-to-light sorting system integrated with Master PLC, vision inspection, and SCADA logging.</p>
+</div>
+<div class="p-6 bg-primary text-white rounded-xl">
+<p class="font-bold text-xl mb-2">Result</p>
+<p class="text-3xl font-extrabold mb-1">0.0%</p>
+<p class="text-xs uppercase opacity-80">Assembly Rejection Rate</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // AOS initialization
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Comparison Slider Logic
+        const slider = document.querySelector('.comparison-slider');
+        const handle = document.getElementById('slider-handle');
+        const afterImage = document.getElementById('after-image');
+
+        if (slider && handle && afterImage) {
+            function moveSlider(e) {
+                const rect = slider.getBoundingClientRect();
+                let position = ((e.pageX || (e.touches && e.touches[0].pageX)) - rect.left) / rect.width * 100;
+                
+                if (position < 0) position = 0;
+                if (position > 100) position = 100;
+
+                handle.style.left = `${position}%`;
+                afterImage.style.width = `${position}%`;
+            }
+
+            slider.addEventListener('mousemove', moveSlider);
+            slider.addEventListener('touchmove', moveSlider);
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

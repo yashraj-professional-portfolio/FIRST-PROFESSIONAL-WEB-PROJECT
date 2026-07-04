@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Linear &amp; Circular Welding SPM | Proximo Robotics &amp; Automation</title>
+<meta content="Advanced welding automation solutions by Proximo. High-precision Linear and Circular Welding SPMs for Industry 4.0." name="description">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005a9c",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary": "#994700",
+                        "on-tertiary-container": "#f4f6ff",
+                        "tertiary-fixed": "#d8e3fb",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "status-error": "#EF4444",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#743400",
+                        "primary-container": "#1e73be",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#a0c9ff",
+                        "primary-fixed": "#d2e4ff",
+                        "on-surface-variant": "#414751",
+                        "tertiary-container": "#667186",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ff8429",
+                        "surface-tint": "#0061a6",
+                        "surface-container": "#eceef0",
+                        "tertiary": "#4e596d",
+                        "background": "#f7f9fb",
+                        "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                        "surface-bright": "#f7f9fb",
+                        "surface": "#f7f9fb",
+                        "primary-fixed-dim": "#a0c9ff",
+                        "on-primary-fixed": "#001c37",
+                        "on-primary-fixed-variant": "#00497f",
+                        "on-secondary-fixed": "#321300",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "outline-variant": "#c1c7d3",
+                        "secondary-fixed": "#ffdbc8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#bcc7de",
+                        "outline": "#717782",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-container": "#f2f5ff",
+                        "status-success": "#10B981",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "status-warning": "#F59E0B",
+                        "surface-variant": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#111c2d",
+                        "on-secondary-container": "#632c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "16px",
+                        "gutter-desktop": "24px",
+                        "container-max-width": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, rgba(30, 115, 190, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 115, 190, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 90, 156, 0.95) 0%, rgba(0, 90, 156, 0.7) 100%);
+        }
+        .spark {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff8429;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .hotspot-label {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .hotspot:hover .hotspot-label {
+            opacity: 1;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.33); }
+            80%, 100% { opacity: 0; }
+        }
+        .pulse-btn::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: -100%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(255, 132, 41, 0.3);
+            border-radius: 45%;
+            animation: pulse-ring 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md blueprint-bg">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<button class="bg-primary text-white font-label-md text-label-md px-6 py-2.5 rounded-lg font-bold hover:bg-primary-container transition-all active:scale-95 shadow-md">
+                REQUEST DEMO
+            </button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Breadcrumbs -->
+<nav class="max-w-container-max-width mx-auto px-margin-desktop py-6">
+<div class="flex items-center gap-2 text-on-surface-variant/60 font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="index.html">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Products</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Linear &amp; Circular Welding SPM</span>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-[80vh] overflow-hidden flex items-center">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-shutter-speed shot of a modern robotic welding arm in a pristine industrial factory. Bright orange sparks shower elegantly from the welding point where two metallic pipes meet. The scene is illuminated by the intense blue electric arc and professional cool-toned studio lighting, highlighting the brushed steel textures of the machine and the geometric blueprint grid lines overlaying the background. The atmosphere is high-tech, precise, and dynamic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWJ12JF2hApKrj1DlgxnXo7Ke9M0Y_yZ3CDrudl27I5EHmqyNTeQClgUBWMfLsDa_oepE47uitkezX4J_P2ggg6_o4Sca9e1FejPSEWW9DmMt0K4ZkOQYZkySTOC6PeDMMD_w0MSX0qQTWHugZC1xx3CCOsFUEkbQtQfJ1kFpY1e_t3d5F39CePiZ0Y2Rm4Ww2afyFmbNaBAMFrqcrY4n6rS0nj00f-6q7qx4p4cq00m37OOJJL7YdnpS7IvDMJ3D4O2IVPd66np0">
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="absolute inset-0 pointer-events-none" id="spark-container"><div class="spark" style="left: 307.717px; top: 5879.27px; opacity: 0.08;"></div><div class="spark" style="left: 963.426px; top: 5350.99px; opacity: 0.18;"></div><div class="spark" style="left: 233.583px; top: 3088.24px; opacity: 0.3;"></div><div class="spark" style="left: 320.836px; top: 5836.75px; opacity: 0.44;"></div><div class="spark" style="left: 947.052px; top: 2821.12px; opacity: 0.54;"></div><div class="spark" style="left: 400.492px; top: 815.879px; opacity: 0.66;"></div><div class="spark" style="left: 1140.32px; top: 5910.67px; opacity: 0.78;"></div><div class="spark" style="left: 1272.17px; top: 1106.38px; opacity: 0.82;"></div><div class="spark" style="left: 987.512px; top: 433.865px; opacity: 0.9;"></div><div class="spark" style="left: 181.557px; top: 4431.03px; opacity: 0.98;"></div><div class="spark" style="left: 1019.18px; top: 1578.74px; opacity: 0.1;"></div><div class="spark" style="left: 868.705px; top: 1585.92px; opacity: 0.22;"></div><div class="spark" style="left: 1186.19px; top: 2374.11px; opacity: 0.38;"></div><div class="spark" style="left: 978.906px; top: 5927.3px; opacity: 0.52;"></div><div class="spark" style="left: 1090.59px; top: 2208.8px; opacity: 0.7;"></div><div class="spark" style="left: 1037.1px; top: 3746.37px; opacity: 0.86;"></div><div class="spark" style="left: 827.401px; top: 4530.66px; opacity: 0.12;"></div><div class="spark" style="left: 977.415px; top: 6503.66px; opacity: 0.36;"></div><div class="spark" style="left: 741.742px; top: 2196px; opacity: 0.6;"></div><div class="spark" style="left: 355.509px; top: 4948.94px; opacity: 0.86;"></div></div>
+<div class="relative z-10 max-w-container-max-width mx-auto px-margin-desktop w-full text-white">
+<div class="max-w-2xl space-y-6">
+<span class="inline-block px-4 py-1 bg-secondary text-white font-label-md text-label-md rounded-full tracking-widest uppercase">Precision Automation</span>
+<h1 class="font-display-lg text-display-lg leading-tight">Linear &amp; Circular <br><span class="text-secondary-container">Welding SPM</span></h1>
+<p class="font-body-lg text-body-lg text-white/80">Next-generation welding solutions engineered for flawless consistency, rapid cycle times, and Industry 4.0 integration. Transform your fabrication with Proximo's robotic precision.</p>
+<div class="flex gap-4 pt-4">
+<button class="bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md px-8 py-4 rounded-lg font-bold transition-all shadow-lg flex items-center gap-2">
+                            GET TECHNICAL SPECIFICATIONS <span class="material-symbols-outlined">download</span>
+</button>
+<button class="border border-white/30 hover:bg-white/10 text-white font-label-md text-label-md px-8 py-4 rounded-lg font-bold transition-all backdrop-blur-md">
+                            VIEW CASE STUDIES
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 3D Interactive Section -->
+<section class="py-24 bg-surface-container-low relative">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary">Technical Specifications</h2>
+<p class="text-on-surface-variant font-body-md mt-4">Uncompromising precision for heavy-duty industrial welding applications.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-2xl"></div>
+<img alt="High-precision industrial process" class="relative rounded-xl shadow-xl w-full object-cover aspect-video" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBimFSZVfPZdidULVwqxCeBOovU96NSTWt97pPowFrlSAohUCcGpE43JI5QbmDIxPlSLXCXdAX3bxvM9MnklSuadATgcyRdgaXnNNJmpUnlQepHvXWYWtrEGBaypp80U3zZClOhdrRrqOy2MPas-aAvHo7wriK20s6aSrN2396KBicSVAiRL6OftkXHuIJLw4pNop6qNFYmhbFOF0SFNhapjKftJPZAvR0SaEFCCKg9nbGL7rOrproKf0pFPluTx9y-cbSHuFiyKxM">
+</div>
+<div class="bg-white rounded-xl shadow-lg border border-blueprint-line overflow-hidden">
+<table class="w-full text-left border-collapse">
+<tbody>
+<tr class="border-b border-blueprint-line">
+<td class="p-4 font-label-md text-primary bg-surface-container-low w-1/3">Control System</td>
+<td class="p-4 font-body-md text-on-surface-variant">Siemens S7-1500 / Rockwell Automation</td>
+</tr>
+<tr class="border-b border-blueprint-line">
+<td class="p-4 font-label-md text-primary bg-surface-container-low">Positioning Accuracy</td>
+<td class="p-4 font-body-md text-on-surface-variant">±0.1 mm</td>
+</tr>
+<tr class="border-b border-blueprint-line">
+<td class="p-4 font-label-md text-primary bg-surface-container-low">Welding Speed</td>
+<td class="p-4 font-body-md text-on-surface-variant">100 - 1500 mm/min</td>
+</tr>
+<tr class="border-b border-blueprint-line">
+<td class="p-4 font-label-md text-primary bg-surface-container-low">Rotary Diameter</td>
+<td class="p-4 font-body-md text-on-surface-variant">Up to 1200 mm</td>
+</tr>
+<tr class="border-b border-blueprint-line">
+<td class="p-4 font-label-md text-primary bg-surface-container-low">Linear Travel</td>
+<td class="p-4 font-body-md text-on-surface-variant">500 mm - 3000 mm (Customizable)</td>
+</tr>
+<tr>
+<td class="p-4 font-label-md text-primary bg-surface-container-low">Power Supply</td>
+<td class="p-4 font-body-md text-on-surface-variant">415V, 3 Phase, 50Hz</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Overview -->
+<section class="py-24 max-w-container-max-width mx-auto px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-2xl group-hover:bg-primary/10 transition-colors"></div>
+<img class="relative rounded-xl shadow-xl w-full object-cover" alt="A premium, high-fidelity industrial photograph of an automated linear and circular welding SPM in a modern smart factory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBSIodoRVxov5S26GOG5hFueetANS7ImOIDEtNuL8hLRhhBBrGdizyo-5iE1PbFY7pT4Itm4Sns-Yw5ZDdC9kIz6qU4dymGUAfCnw6NI4BnZhXOE9wsWlzCFaFSo9hwfgU__dYpm_9vRQkTwelKOCcE0m6ZT_LCI8nSMAVgBZHyOUEfBWYMG_CzVEFXW3jCIiz_wMXi5b0UPLtkUfa7CaTpUWug6tTtqr5IjVECK6kqJawKFAzjFKvcdu32Nk2QFkcQnULwjV80qU">
+</div>
+<div class="space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-primary">What is a Linear &amp; Circular Welding SPM?</h2>
+<div class="w-20 h-1.5 bg-secondary-container"></div>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                    A Linear &amp; Circular Special Purpose Machine (SPM) is a dedicated automation system designed to perform high-precision welding operations on either straight seams or circular components. Unlike general-purpose robotic arms, our SPMs are custom-engineered for specific product geometries, ensuring maximum stability, repeatability, and throughput.
+                </p>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                    Whether it's the longitudinal seam of a pressure vessel or the circumferential weld of an automotive flange, our machines integrate advanced servo motion control with sophisticated sensor feedback to deliver X-ray quality welds every single time.
+                </p>
+<ul class="space-y-4 pt-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-status-success" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">Customizable fixtures for diverse part shapes.</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-status-success" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">Seamless integration with MIG, TIG, and Plasma processes.</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Key Features (Bento Grid) -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary">Technical Superiority</h2>
+<p class="text-on-surface-variant font-body-md mt-4">Engineered to outperform standard industrial welding solutions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+<div class="p-8 bg-surface-container-low border border-blueprint-line rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">target</span>
+<h3 class="font-headline-md text-headline-md mb-2">High Welding Accuracy</h3>
+<p class="text-on-surface-variant text-sm">Precision positioning within +/- 0.1mm for perfect bead penetration and alignment.</p>
+</div>
+<div class="p-8 bg-primary-container text-white border border-primary rounded-xl shadow-xl hover:shadow-primary/20 transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-white text-4xl mb-4">rebase_edit</span>
+<h3 class="font-headline-md text-headline-md mb-2">Automated Cycles</h3>
+<p class="text-white/80 text-sm">One-touch operation for clamping, welding, and release, minimizing manual intervention.</p>
+</div>
+<div class="p-8 bg-surface-container-low border border-blueprint-line rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">speed</span>
+<h3 class="font-headline-md text-headline-md mb-2">Servo Motion Control</h3>
+<p class="text-on-surface-variant text-sm">Ultra-smooth travel speeds controlled via high-torque AC servo drives for consistent seams.</p>
+</div>
+<div class="p-8 bg-surface-container-low border border-blueprint-line rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">dynamic_form</span>
+<h3 class="font-headline-md text-headline-md mb-2">Multi-Process</h3>
+<p class="text-on-surface-variant text-sm">Modular design allows easy switching between MIG, TIG, Plasma, and Laser welding heads.</p>
+</div>
+<div class="p-8 bg-surface-container-low border border-blueprint-line rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">memory</span>
+<h3 class="font-headline-md text-headline-md mb-2">PLC Automation</h3>
+<p class="text-on-surface-variant text-sm">Siemens/Mitsubishi PLC core with robust logic for failsafe industrial performance.</p>
+</div>
+<div class="p-8 bg-surface-container-low border border-blueprint-line rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">sensors</span>
+<h3 class="font-headline-md text-headline-md mb-2">Industry 4.0 Ready</h3>
+<p class="text-on-surface-variant text-sm">IoT enabled for remote data logging, cycle monitoring, and predictive maintenance.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Working Process -->
+<section class="py-24 bg-surface relative overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary">Automated Workflow</h2>
+<p class="text-on-surface-variant font-body-md mt-4">A seamless cycle from raw component to finished product.</p>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-start gap-8">
+<!-- Connector Line (Desktop) -->
+<div class="hidden md:block absolute top-10 left-0 right-0 h-0.5 bg-blueprint-line z-0"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-white border-2 border-primary rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<h4 class="font-label-md text-primary mb-1">Component Loading</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Manual or robotic placement of parts.</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-white border-2 border-primary rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">lock</span>
+</div>
+<h4 class="font-label-md text-primary mb-1">Automatic Clamping</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Pneumatic/Hydraulic secure fixation.</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-white border-2 border-primary rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">adjust</span>
+</div>
+<h4 class="font-label-md text-primary mb-1">Weld Positioning</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Servo-aligned torch coordinates.</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-secondary-container border-2 border-secondary rounded-full flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-3xl">flare</span>
+</div>
+<h4 class="font-label-md text-secondary mb-1">Welding Cycle</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Precision linear/circular execution.</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-white border-2 border-primary rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">verified</span>
+</div>
+<h4 class="font-label-md text-primary mb-1">Quality Inspection</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Integrated sensor verification.</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center w-full group">
+<div class="w-20 h-20 bg-white border-2 border-primary rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">download_done</span>
+</div>
+<h4 class="font-label-md text-primary mb-1">Unloading</h4>
+<p class="text-xs text-on-surface-variant max-w-[150px]">Safe removal of finished assembly.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Machine Types -->
+<section class="py-24">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid md:grid-cols-2 gap-gutter-desktop">
+<div class="group relative overflow-hidden rounded-2xl shadow-xl bg-white border border-blueprint-line">
+<div class="aspect-video overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A detailed view of a Linear Welding SPM machine. The focal point is a heavy-duty gantry system with a welding torch moving precisely along a 3-meter long metal seam on a industrial tank. The lighting emphasizes the cold, metallic surfaces of the factory and the warm glow from the machine's control panel indicators. The design looks robust and high-precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeG0RXXSCyNXysago5D6a_7gIopnHeMEzWPSgcVFN4J9_DmN7yJliZFo0F0eW0AfQElpIHIpD6YroC5fYsk22SK9oFsRquDIK3Oe4YXlLKvnE_66CIH-qqfE8Z0YLrGCJ0z0eR_XONEKNWRnS_1kCx_j3gqcEL4N4uLG0-2dEm_L2IKX1XIj8XNir6SzuuWUrJM4SJitY5eg507WzK0NseIa93GpGTygw_39wXl_jnYUaGwWqQfYdYG_LUdU-prLLgeF0h7r6geYQ" style="filter: brightness(1.1) contrast(1.05);">
+</div>
+<div class="p-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Linear Welding SPM</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Designed for long, continuous seam welding on sheets, tubes, and rectangular vessels. Features high-speed carriage movement and uniform penetration control.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all" href="#">EXPLORE LINEAR SOLUTIONS <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-2xl shadow-xl bg-white border border-blueprint-line">
+<div class="aspect-video overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A Circular Welding SPM in action, welding a large industrial flange to a pipe. The pipe is mounted on a heavy-duty motorized rotary positioner that turns with extreme smoothness. The welding arc creates a brilliant focus point in the center of the frame, with the surrounding factory environment blurred slightly. The image conveys high speed, circular precision, and heavy industrial power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgTFdGk1tY8iZXc4aZHYWsP82YqnRU7VwRK6LJ6dwYmmR4TYMzX2t2sPM6pcE9BkvRC7jRnYH2gn83lwxcoyKpeoQFyE0hw8yzN3OEgG3-Lg3Db7EiDEqbiMl8GHcz-LlfgS3A6zPzfD-wojYKKm4ndut61pnJrKjMHritlt-nZSaIsS8LoMXn3AmT7uN0Xa8zVBgqXPYcrNJcRVZ-DapErcygKEcSYD4VISgA9h9ABYNI1UJHcfEtWSUd4E-rCTq6k0nRJsVNlZE" style="filter: brightness(1.1) contrast(1.05);">
+</div>
+<div class="p-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Circular Welding SPM</h3>
+<p class="text-on-surface-variant font-body-md mb-6">Optimized for circumferential welding of pipes, flanges, and circular containers. Integrated with high-torque rotary positioners for synchronized torch movement.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all" href="#">EXPLORE CIRCULAR SOLUTIONS <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Performance Metrics -->
+<section class="py-24 bg-primary text-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-2 lg:grid-cols-4 gap-gutter-desktop">
+<div class="text-center p-6 border-r border-white/10 last:border-0">
+<p class="font-display-lg text-display-lg text-secondary-container" id="stat-1">99%</p>
+<p class="font-label-md uppercase tracking-widest mt-2">Weld Consistency</p>
+</div>
+<div class="text-center p-6 border-r border-white/10 last:border-0">
+<p class="font-display-lg text-display-lg text-secondary-container" id="stat-2">40%</p>
+<p class="font-label-md uppercase tracking-widest mt-2">Faster Production</p>
+</div>
+<div class="text-center p-6 border-r border-white/10 last:border-0">
+<p class="font-display-lg text-display-lg text-secondary-container" id="stat-3">30%</p>
+<p class="font-label-md uppercase tracking-widest mt-2">Cost Reduction</p>
+</div>
+<div class="text-center p-6 border-r border-white/10 last:border-0">
+<p class="font-display-lg text-display-lg text-secondary-container" id="stat-4">50%</p>
+<p class="font-label-md uppercase tracking-widest mt-2">Reduced Rework</p>
+</div>
+</div>
+</section>
+<!-- Applications -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary">Industry Applications</h2>
+<p class="text-on-surface-variant font-body-md mt-4">Versatile solutions serving a wide range of industrial sectors.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">directions_car</span>
+<p class="font-headline-md text-body-lg">Automotive Components</p>
+</div>
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">mode_fan</span>
+<p class="font-headline-md text-body-lg">Exhaust Systems</p>
+</div>
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">propane_tank</span>
+<p class="font-headline-md text-body-lg">Pressure Vessels</p>
+</div>
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">reorder</span>
+<p class="font-headline-md text-body-lg">Pipe Assemblies</p>
+</div>
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">agriculture</span>
+<p class="font-headline-md text-body-lg">Agricultural Equipment</p>
+</div>
+<div class="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blueprint-line">
+<span class="material-symbols-outlined text-secondary text-3xl">factory</span>
+<p class="font-headline-md text-body-lg">Industrial Fabrication</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Study Highlight -->
+<section class="py-24 bg-primary-container relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 blueprint-bg"></div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop relative z-10 text-white">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="font-label-md text-secondary-container uppercase tracking-widest mb-4 block">Success Story</span>
+<h2 class="font-headline-lg text-headline-lg mb-6">Revolutionizing Exhaust Manifold Welding</h2>
+<div class="space-y-8">
+<div>
+<h4 class="font-label-md text-secondary-container uppercase mb-2">The Challenge</h4>
+<p class="font-body-md text-white/80">A Tier-1 automotive supplier faced 12% rework rates due to manual welding inconsistencies in complex manifold joints.</p>
+</div>
+<div>
+<h4 class="font-label-md text-secondary-container uppercase mb-2">Our Solution</h4>
+<p class="font-body-md text-white/80">Proximo deployed a customized Circular Welding SPM with dual-torch synchronization and real-time seam tracking.</p>
+</div>
+<div class="grid grid-cols-3 gap-4 pt-4">
+<div>
+<p class="font-headline-md text-secondary-container">0.5%</p>
+<p class="text-[10px] text-white/60">Final Rework Rate</p>
+</div>
+<div>
+<p class="font-headline-md text-secondary-container">250%</p>
+<p class="text-[10px] text-white/60">ROI in 14 Months</p>
+</div>
+<div>
+<p class="font-headline-md text-secondary-container">3X</p>
+<p class="text-[10px] text-white/60">Output Increase</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square bg-white/5 rounded-full absolute -top-10 -right-10 w-64 h-64 blur-3xl"></div>
+<img class="relative rounded-2xl shadow-2xl border border-white/20 w-full" data-alt="A professional close-up shot of a perfectly welded stainless steel exhaust manifold. The weld bead is incredibly uniform, exhibiting a beautiful 'stack of dimes' appearance with slight heat discoloration in purple and blue hues. The manifold is held by a high-tech robotic fixture. The lighting is crisp, emphasizing the high-quality craftsmanship enabled by Proximo's automation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIuPUwwkJkIjlWA-4d0yhwIa1taaLTQu8V1wOklGYd5OwLkDjLbidS41MKkco9FG4y6W_lDVdK2Bcu2NZZk8UZvafXP3j4QVkKyGuAbSB8gWji_XUUpQy1tp8WsSTBZe8YH2SP78Vb1jIoC-DvmxeBM6wlNfFN77bLqy7e8-ZBRQ1LnGCtuP02tAyW7GxQEK6UlCvIqU46GWh2QjZ-_VfvacaLdVJC_FOtxELt5sQpYxFF-gWO5i4D60RvuguekvXnXpi7Xyw5uu8" style="filter: brightness(1.1) contrast(1.05);">
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 relative bg-inverse-surface overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop relative z-10 text-center">
+<h2 class="font-headline-lg text-headline-lg text-white mb-6">Ready to Automate Your Welding Process?</h2>
+<p class="text-white/70 max-w-2xl mx-auto mb-10 font-body-lg">Consult with our engineering team to design a bespoke SPM tailored to your specific manufacturing needs.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="relative bg-secondary-container hover:bg-secondary text-white font-label-md text-label-md px-10 py-5 rounded-lg font-bold transition-all shadow-xl group overflow-hidden pulse-btn">
+<span class="relative z-10 flex items-center gap-2">CONTACT US NOW <span class="material-symbols-outlined">mail</span></span>
+</button>
+<button class="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md font-label-md text-label-md px-10 py-5 rounded-lg font-bold transition-all">
+                        REQUEST A LIVE DEMO
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Hero Spark Animation
+        function createSpark() {
+            const container = document.getElementById('spark-container');
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            
+            spark.style.left = startX + 'px';
+            spark.style.top = startY + 'px';
+            
+            container.appendChild(spark);
+            
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 2 + Math.random() * 4;
+            let posX = startX;
+            let posY = startY;
+            let opacity = 1;
+            
+            const animate = () => {
+                posX += Math.cos(angle) * velocity;
+                posY += Math.sin(angle) * velocity + 0.1; // Gravity
+                opacity -= 0.02;
+                
+                spark.style.left = posX + 'px';
+                spark.style.top = posY + 'px';
+                spark.style.opacity = opacity;
+                
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    spark.remove();
+                }
+            };
+            
+            requestAnimationFrame(animate);
+        }
+
+        setInterval(createSpark, 100);
+
+        // Count-up animation for performance metrics
+        const animateValue = (id, start, end, duration) => {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value + (id === 'stat-1' || id === 'stat-2' || id === 'stat-3' || id === 'stat-4' ? '%' : '');
+                if (id === 'stat-4') obj.innerHTML = value + '%';
+                if (id === 'stat-1') obj.innerHTML = value + '%';
+                if (id === 'stat-2') obj.innerHTML = value + '%';
+                if (id === 'stat-3') obj.innerHTML = value + '%';
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Intersection Observer for stats
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue("stat-1", 0, 99, 2000);
+                    animateValue("stat-2", 0, 40, 2000);
+                    animateValue("stat-3", 0, 30, 2000);
+                    animateValue("stat-4", 0, 50, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('stat-1').parentElement.parentElement);
+    </script>
+
+
+
+
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

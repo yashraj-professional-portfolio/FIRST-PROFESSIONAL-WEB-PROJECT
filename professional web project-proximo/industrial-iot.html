@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industrial IoT Solutions | ProXimo Robotics &amp; Automation</title>
+<meta content="Connect machines and unlock intelligent decision-making with ProXimo Industrial IoT solutions." name="description"/>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "secondary": "#994700",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#321300",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-bright": "#f7f9fb",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-container": "#f2f5ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "surface-tint": "#0061a6",
+                    "status-warning": "#F59E0B",
+                    "secondary-container": "#ff8429",
+                    "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container": "#eceef0",
+                    "primary": "#005a9c",
+                    "on-tertiary-container": "#f4f6ff",
+                    "tertiary-fixed": "#d8e3fb",
+                    "inverse-primary": "#a0c9ff",
+                    "tertiary-container": "#667186",
+                    "on-primary-fixed": "#001c37",
+                    "background": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "on-error-container": "#93000a",
+                    "status-success": "#10B981",
+                    "tertiary-fixed-dim": "#bcc7de",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "surface": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-primary-fixed-variant": "#00497f",
+                    "on-secondary-fixed-variant": "#743400",
+                    "outline-variant": "#c1c7d3",
+                    "on-surface": "#191c1e",
+                    "on-tertiary-fixed": "#111c2d",
+                    "primary-fixed-dim": "#a0c9ff",
+                    "primary-container": "#1e73be",
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-container": "#632c00",
+                    "primary-fixed": "#d2e4ff",
+                    "tertiary": "#4e596d",
+                    "outline": "#717782",
+                    "on-surface-variant": "#414751",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-primary": "#ffffff",
+                    "status-error": "#EF4444"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter-mobile": "16px",
+                    "unit": "8px",
+                    "container-max-width": "1280px",
+                    "gutter-desktop": "24px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Montserrat"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, rgba(30, 115, 190, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 115, 190, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 49, 127, 0.7), rgba(0, 49, 127, 0.4));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md blueprint-bg min-h-screen">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-[70vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Industrial IoT smart manufacturing dashboard and factory connectivity" class="w-full h-full object-cover" data-alt="A sophisticated digital factory dashboard displayed on a high-resolution terminal within a modern manufacturing plant. The interface shows real-time data visualizations, rotating 3D machine models, and performance metrics in ProXimo's signature blue and white palette. The background features blurred industrial robotics working in a clean, brightly lit technical environment that feels advanced and precise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxychNq4nwudiookM_ZM-i8gExDwIP1Z6vfLs4kv5JsLreai3Fj51VvaK4QV51tZBgkFWWl_2reVN79WZZsSVwGRgFth0MlF4yNuR7bjdp5vkRvu1etlEHac8Ws8SWsnO2FZBokOnQyrEvyBr8f0d3mrDP21gp4YsI4ce9NTVR264JIcoydBW6laHt5IVvXJnDkQbeYsrCAyapY5VP9jN0fPbT7gqO-qpL0RWG6oi5kPBMgcKIRSgv9xS82FJmwvR1tBKUt0YALXmc"/>
+<div class="absolute inset-0 hero-overlay"></div>
+</div>
+<div class="relative z-10 w-full max-w-container-max-width mx-auto px-margin-desktop py-16">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white border border-white/30 px-4 py-1.5 rounded-full mb-6">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">sensors</span>
+<span class="font-label-sm uppercase tracking-wider">Industry 4.0 Readiness</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white leading-tight mb-6">
+                Industrial IoT Solutions for <br/><span class="text-primary-fixed">Smart Manufacturing</span>
+</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl mb-10">
+                Connect machines, collect real-time data, monitor performance, and unlock intelligent decision-making through advanced Industrial IoT solutions.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:translate-y-[-2px] shadow-lg">Schedule a Consultation</button>
+<button class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-lg font-bold transition-all">Contact Us</button>
+</div>
+</div>
+</div>
+</section>
+<!-- What is IIoT Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row gap-16 items-center">
+<div class="w-full md:w-1/2">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-8 rounded-lg space-y-4 border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-4xl">hub</span>
+<h3 class="font-headline-md text-on-surface">Connectivity</h3>
+<p class="text-body-md text-on-surface-variant">Breaking down silos between OT and IT layers.</p>
+</div>
+<div class="bg-primary p-8 rounded-lg space-y-4 text-on-primary mt-8">
+<span class="material-symbols-outlined text-4xl">analytics</span>
+<h3 class="font-headline-md">Intelligence</h3>
+<p class="text-body-md text-on-primary/80">Turning raw sensor data into predictive insights.</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Connecting Industry Through Intelligence</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Industrial IoT is more than just connecting devices; it's about building a nervous system for your manufacturing operations. ProXimo bridges the gap between legacy hardware and modern cloud ecosystems, enabling transparency across every stage of your production line.
+                </p>
+<p class="text-body-md text-on-surface-variant italic border-l-4 border-primary pl-6 py-2">
+                    "Precision through transparency isn't just our motto—it's the technical architecture of our IoT deployment strategy."
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="py-24">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Comprehensive IIoT Services</h2>
+<div class="h-1 w-24 bg-primary mx-auto"></div>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">Scalable solutions designed to meet the rigorous demands of industrial environments.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">settings_input_component</span>
+<h4 class="font-headline-md text-on-surface mb-3">Machine Connectivity</h4>
+<p class="text-body-md text-on-surface-variant">Retrofitting legacy equipment and integrating modern PLCs into a unified data network.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">monitoring</span>
+<h4 class="font-headline-md text-on-surface mb-3">Real-Time Monitoring</h4>
+<p class="text-body-md text-on-surface-variant">Live streaming of operational parameters to centralized command centers for instant oversight.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">database</span>
+<h4 class="font-headline-md text-on-surface mb-3">Data Acquisition</h4>
+<p class="text-body-md text-on-surface-variant">High-fidelity data collection systems designed for high-frequency industrial sampling rates.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">cloud_sync</span>
+<h4 class="font-headline-md text-on-surface mb-3">Cloud Integration</h4>
+<p class="text-body-md text-on-surface-variant">Secure transmission to AWS, Azure, or private cloud environments for enterprise-level scaling.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">precision_manufacturing</span>
+<h4 class="font-headline-md text-on-surface mb-3">Predictive Maintenance</h4>
+<p class="text-body-md text-on-surface-variant">AI-driven algorithms that forecast equipment failure before it happens, saving costs.</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">query_stats</span>
+<h4 class="font-headline-md text-on-surface mb-3">Production Analytics</h4>
+<p class="text-body-md text-on-surface-variant">In-depth OEE tracking and bottleneck identification for optimized shop-floor efficiency.</p>
+</div>
+<!-- Card 7 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">bolt</span>
+<h4 class="font-headline-md text-on-surface mb-3">Energy Monitoring</h4>
+<p class="text-body-md text-on-surface-variant">Detailed mapping of power consumption to identify sustainability and saving opportunities.</p>
+</div>
+<!-- Card 8 -->
+<div class="bg-white p-8 rounded border border-outline-variant hover:border-primary hover:shadow-xl transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block group-hover:scale-110 duration-300">vitals</span>
+<h4 class="font-headline-md text-on-surface mb-3">Remote Diagnostics</h4>
+<p class="text-body-md text-on-surface-variant">Expert technical support through remote access, minimizing the need for on-site visits.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-24 bg-surface-container-low overflow-hidden">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-16 text-center">Transformative Benefits</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">speed</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Operational Efficiency</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Streamline workflows with automated data loops.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 100ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">timer_off</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Reduced Downtime</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Shift from reactive to proactive maintenance models.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 200ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">visibility</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Real-Time Visibility</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Complete transparency across the global value chain.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 300ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">psychology</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Better Decisions</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Data-backed strategy for capital investments.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 400ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">verified</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Equipment Reliability</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Extend the lifecycle of critical manufacturing assets.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 500ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">trending_up</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Enhanced Productivity</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Higher throughput with the same resource base.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 600ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">savings</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Lower Costs</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Reduce waste and optimize spare parts inventory.</p>
+</div>
+<div class="reveal-on-scroll bg-white p-8 rounded-lg shadow-sm border border-outline-variant/30 flex flex-col items-center text-center group hover:bg-primary transition-colors duration-500" style="transition-delay: 700ms">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-white/20">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">apartment</span>
+</div>
+<h4 class="font-headline-md text-on-surface group-hover:text-white mb-2">Scalable Infrastructure</h4>
+<p class="text-body-md text-on-surface-variant group-hover:text-white/80">Build a foundation for future-ready operations.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="py-24">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<div class="text-center mb-20">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Intelligence Architecture</h2>
+<p class="text-body-lg text-on-surface-variant">Our 6-step roadmap from raw signal to business value.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 relative">
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center font-bold text-primary mb-6 shadow-md z-10">1</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">Sensors &amp; Devices</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Raw data collection from physical assets.</p>
+</div>
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center font-bold text-primary mb-6 shadow-md z-10">2</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">PLCs &amp; Control</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Processing via industrial logic controllers.</p>
+</div>
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center font-bold text-primary mb-6 shadow-md z-10">3</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">Transmission</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Secure wired/wireless data transfer protocols.</p>
+</div>
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center font-bold text-primary mb-6 shadow-md z-10">4</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">Storage</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Cloud or local server environment management.</p>
+</div>
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-primary flex items-center justify-center font-bold text-primary mb-6 shadow-md z-10">5</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">Analytics</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Advanced AI modeling and dashboarding.</p>
+</div>
+<div class="flex flex-col items-center text-center relative">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center font-bold text-on-primary mb-6 shadow-md z-10">6</div>
+<h5 class="font-headline-md text-on-surface text-[18px] mb-2 leading-tight">Insights</h5>
+<p class="text-body-md text-on-surface-variant text-sm px-4">Actionable business intelligence for growth.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Industries Section -->
+<section class="py-24 bg-surface-container">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 text-center">Industries Empowered by ProXimo</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">directions_car</span>
+<span class="font-label-md">Automotive</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">factory</span>
+<span class="font-label-md">Manufacturing</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">package_2</span>
+<span class="font-label-md">Packaging</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+<span class="font-label-md">Food &amp; Beverage</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+<span class="font-label-md">Pharmaceutical</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">engineering</span>
+<span class="font-label-md">Engineering</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<span class="font-label-md">Process Industries</span>
+</div>
+<div class="bg-white p-6 rounded flex items-center gap-4 border border-outline-variant/30 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<span class="font-label-md">Logistics</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Why ProXimo -->
+<section class="py-24">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<div class="bg-primary-container text-on-primary-container p-12 rounded-2xl flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/2 space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-white">Why ProXimo?</h2>
+<p class="text-body-lg text-white/80">We don't just provide software; we provide an integrated industrial engineering strategy backed by decades of automation expertise.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">Industry 4.0 Expertise</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">Customized IoT Solutions</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">End-to-End Implementation</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">Secure Data Architecture</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">Real-Time Systems</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-white">Ongoing Technical Support</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2">
+<img alt="Tech implementation" class="rounded-xl shadow-2xl border-4 border-white/20" data-alt="A clean-room industrial setting where two technicians in white coats examine a precision robotic assembly line. They are holding a tablet showing real-time diagnostic data overlays on the physical machines. The lighting is bright and technical, highlighting the chrome and white surfaces of the equipment. The overall aesthetic is one of high-tech competence, security, and meticulous industrial engineering in line with the ProXimo brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA9N-7YzLbrx5Z8T5Q5XumxmJqScpoaKlqC8ppn73VUwkZUT4m4nl2wRy3GLG41Sl232_Omg1vzYS-NrbhtS5fAZusIOMBulcEWFolAdwkqDnyVfEVh8nJnTHM2Eu8Zoh0CQuGNNF0ZNEtOxrzqAb_3JmD5w28cMkWXyNMiKqDdW6X71twcJfKHSrTcD6ITivaIYTB6Tf8FwYLut8G9_a6HoX_6i5REJcka-oSpZNZUlZT_jT84s6m8a8y4IVVX1W7eT6FjOh-agVY"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-24 text-center px-margin-desktop bg-gradient-to-br from-[#1E73BE] to-[#F47C20]">
+<div class="max-w-4xl mx-auto space-y-8">
+<h2 class="font-display-lg text-white text-5xl">Transform Your Factory into a Smart Factory</h2>
+<p class="font-body-lg text-white/90 text-xl">Join the next generation of manufacturers leveraging intelligence to stay ahead.</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center pt-4">
+<button class="bg-white text-primary px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/90 hover:scale-105 transition-all shadow-xl">
+                Request Demo
+            </button>
+<button class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/10 hover:scale-105 transition-all">
+                Contact Our Experts
+            </button>
+</div>
+</div>
+</section>
+<!-- 8. FOOTER -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+    // Reveal animation on scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+</script>
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

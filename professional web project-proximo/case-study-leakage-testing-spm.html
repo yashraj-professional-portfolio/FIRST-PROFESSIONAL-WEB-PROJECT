@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Leakage Testing SPM | PROXIMO Robotics &amp; Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "background": "#f7f9fb",
+                    "outline-variant": "#c1c7d3",
+                    "tertiary-fixed": "#d8e3fb",
+                    "inverse-primary": "#a0c9ff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a0c9ff",
+                    "on-tertiary-fixed": "#111c2d",
+                    "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                    "tertiary": "#4e596d",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0061a6",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "status-warning": "#F59E0B",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "error": "#ba1a1a",
+                    "status-success": "#10B981",
+                    "on-secondary-fixed-variant": "#743400",
+                    "secondary": "#994700",
+                    "primary-container": "#1e73be",
+                    "status-error": "#EF4444",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-secondary-fixed": "#321300",
+                    "on-surface-variant": "#414751",
+                    "surface": "#f7f9fb",
+                    "secondary-container": "#ff8429",
+                    "primary": "#005a9c",
+                    "surface-container-high": "#e6e8ea",
+                    "tertiary-fixed-dim": "#bcc7de",
+                    "inverse-surface": "#2d3133",
+                    "surface-dim": "#d8dadc",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#667186",
+                    "surface-container-low": "#f2f4f6",
+                    "on-surface": "#191c1e",
+                    "outline": "#717782",
+                    "on-primary-fixed": "#001c37",
+                    "primary-fixed": "#d2e4ff",
+                    "on-primary-container": "#f2f5ff",
+                    "on-secondary-container": "#632c00",
+                    "on-tertiary-container": "#f4f6ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-primary-fixed-variant": "#00497f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max-width": "1280px",
+                    "gutter-mobile": "16px",
+                    "margin-mobile": "20px",
+                    "gutter-desktop": "24px",
+                    "unit": "8px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .blueprint-bg {
+            background-image: radial-gradient(var(--blueprint-line) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .hero-parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .timeline-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: #cbd5e1;
+            z-index: 0;
+        }
+        .timeline-step:last-child::after {
+            display: none;
+        }
+        .counter-value::after {
+            content: '+';
+        }
+        threejs-scene {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-x-hidden" data-aos-delay="0" data-aos-duration="1000" data-aos-easing="ease-out-quad">
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-on-primary-fixed/90 via-on-primary-fixed/40 to-transparent z-10"></div>
+<div class="hero-parallax absolute inset-0 w-full h-full" data-alt="A high-tech industrial automation environment featuring robotic arms and precise leak testing equipment in a modern factory setting. The lighting is cool-toned with bright white highlights reflecting off polished metallic surfaces, creating a professional and technologically advanced atmosphere. The background is slightly out of focus to emphasize the sophisticated machinery in the foreground, using a palette of deep blues and industrial silvers." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqfoauC07fZLwgHzH9XP--vbPrzhj3MYlvUdhtVa0NmCeukk4Tn_fd0oMainDQtP6-FYeAg_R1e0OpYCgcoyUJWlEOfN6Bpdws-uqg1vZjyKWP9MntxOkRKQ0fPGgujW-zXK59d5Wo-gT51uyLWjAnsX0SimJgYJvlQwxCwUiGdX53UjfndO-8QXprQvmvd6whbIyvynqjVmAknskVLWM8zc0oaSPmJcrQM9dsjpy9Zm7R3xG0wC5rZ0WKUElY_QrGm4-P6i1kLdw');">
+</div>
+</div>
+<div class="relative z-20 max-w-container-max-width mx-auto px-margin-desktop w-full text-white">
+<div class="max-w-2xl aos-init aos-animate" data-aos="fade-right">
+<span class="bg-secondary px-3 py-1 text-label-sm font-label-sm rounded uppercase mb-4 inline-block">Special Purpose Machinery</span>
+<h1 class="font-display-lg text-display-lg mb-6 leading-tight">Leakage Testing SPM</h1>
+<p class="font-body-lg text-body-lg mb-8 text-white/90">Precision Leak Detection Solutions for Quality-Critical Manufacturing Processes. Engineered for zero-defect production lines.</p>
+<div class="flex flex-wrap gap-4">
+<a class="bg-secondary text-white px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-all flex items-center gap-2" href="https://wayzontech.in/wp-content/uploads/2025/03/Case-Study-Leak-Test-SPM.pdf" target="_blank">
+                        VIEW CASE STUDY PDF
+                        <span class="material-symbols-outlined">download</span>
+</a>
+<button class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-white/20 transition-all">
+                        Technical Specs
+                    </button>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+<span class="material-symbols-outlined text-white text-4xl">keyboard_double_arrow_down</span>
+</div>
+</section>
+<!-- Product Overview -->
+<section class="py-24 blueprint-bg">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="aos-init aos-animate" data-aos="fade-up">
+<div class="relative p-4 bg-white shadow-xl rounded-xl border border-outline-variant overflow-hidden">
+<!-- STITCH_THREEJS_START:ANIMATION_21 class="w-full h-[500px] bg-transparent" -->
+<div class="w-full h-[500px] bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_21" style="width:100%;height:100%"><canvas width="637" height="625" style="display: block; width: 510px; height: 500px;"></canvas><canvas width="637" height="625" style="display: block; width: 510px; height: 500px;"></canvas><canvas width="637" height="625" style="display: block; width: 510px; height: 500px;"></canvas></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_21');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 10, 7);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0x1e73be, 2, 50);
+pointLight.position.set(-5, 5, -5);
+scene.add(pointLight);
+
+// Group to hold the machine assembly
+const machineGroup = new THREE.Group();
+scene.add(machineGroup);
+
+// Materials
+const metalMaterial = new THREE.MeshPhongMaterial({ color: 0xd1d5db, shininess: 100 });
+const accentMaterial = new THREE.MeshPhongMaterial({ color: 0x1e73be, shininess: 80 });
+const glassMaterial = new THREE.MeshPhongMaterial({ color: 0x88ccff, transparent: true, opacity: 0.3 });
+
+// Machine Base
+const baseGeo = new THREE.BoxGeometry(4, 0.5, 3);
+const base = new THREE.Mesh(baseGeo, metalMaterial);
+base.position.y = -0.25;
+machineGroup.add(base);
+
+// Vertical Pillars
+const pillarGeo = new THREE.BoxGeometry(0.2, 3, 0.2);
+for (let x of [-1.8, 1.8]) {
+    for (let z of [-1.3, 1.3]) {
+        const pillar = new THREE.Mesh(pillarGeo, metalMaterial);
+        pillar.position.set(x, 1.5, z);
+        machineGroup.add(pillar);
+    }
+}
+
+// Top Frame
+const topFrameGeo = new THREE.BoxGeometry(4, 0.2, 3);
+const topFrame = new THREE.Mesh(topFrameGeo, metalMaterial);
+topFrame.position.y = 3;
+machineGroup.add(topFrame);
+
+// Central Chamber (The Testing Unit)
+const chamberGeo = new THREE.BoxGeometry(2, 2, 2);
+const chamber = new THREE.Mesh(chamberGeo, glassMaterial);
+chamber.position.y = 1.5;
+machineGroup.add(chamber);
+
+// Testing Tooling / Cylinder
+const cylinderGeo = new THREE.CylinderGeometry(0.3, 0.3, 1, 32);
+const cylinder = new THREE.Mesh(cylinderGeo, accentMaterial);
+cylinder.position.y = 2.5;
+machineGroup.add(cylinder);
+
+// "Part" being tested
+const partGeo = new THREE.TorusGeometry(0.5, 0.2, 16, 100);
+const part = new THREE.Mesh(partGeo, new THREE.MeshPhongMaterial({ color: 0x4b5563 }));
+part.rotation.x = Math.PI / 2;
+part.position.y = 0.8;
+machineGroup.add(part);
+
+// Animation state
+let time = 0;
+camera.position.set(5, 4, 6);
+camera.lookAt(0, 1.5, 0);
+
+function animate() {
+    requestAnimationFrame(animate);
+    time += 0.02;
+
+    // Suble rotation of the assembly
+    machineGroup.rotation.y += 0.005;
+
+    // Animate the testing cylinder moving up and down
+    cylinder.position.y = 2.5 + Math.sin(time) * 0.3;
+
+    // Visual "pulse" effect inside the part when testing
+    const pulseScale = 1 + Math.max(0, Math.sin(time * 2)) * 0.1;
+    part.scale.set(pulseScale, pulseScale, pulseScale);
+
+    renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_21 -->
+<div class="absolute -bottom-8 -right-8 bg-primary p-6 rounded-xl shadow-lg hidden md:block">
+<p class="text-white font-headline-md text-headline-md">99.9%</p>
+<p class="text-white/80 font-label-sm text-label-sm">Testing Accuracy</p>
+</div>
+</div>
+</div>
+<div class="aos-init aos-animate" data-aos="fade-left">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">What is a Leakage Testing SPM?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6 leading-relaxed">
+                        A Leakage Testing Special Purpose Machine (SPM) is a custom-engineered automation system designed to detect microscopic leaks and pressure drops in industrial components. Whether it's automotive engine parts, pharmaceutical vials, or aerospace valves, our SPM ensures that every unit meets stringent quality standards.
+                    </p>
+<div class="space-y-4">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Differential Pressure Method</h4>
+<p class="text-on-surface-variant text-sm">Highly sensitive detection of minute air pressure variations.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Integrated Clamping Systems</h4>
+<p class="text-on-surface-variant text-sm">Pneumatic or hydraulic sealing tailored to component geometry.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Features Bento Grid -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16 aos-init aos-animate" data-aos="fade-up">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Unrivaled Precision Features</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Advanced engineering meets Industry 4.0 integration for future-proof quality control.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature Card 1 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">biotech</span>
+<h3 class="font-headline-md text-headline-md mb-2">Automated Leak Detection</h3>
+<p class="text-on-surface-variant">Eliminate human error with fully autonomous sensing and analysis protocols.</p>
+</div>
+<!-- Feature Card 2 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">target</span>
+<h3 class="font-headline-md text-headline-md mb-2">High Accuracy Testing</h3>
+<p class="text-on-surface-variant">Detection capabilities down to 0.01 cc/min leak rates for extreme precision.</p>
+</div>
+<!-- Feature Card 3 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">settings_input_component</span>
+<h3 class="font-headline-md text-headline-md mb-2">PLC Controlled</h3>
+<p class="text-on-surface-variant">Robust industrial logic controllers ensure cycle-to-cycle repeatability.</p>
+</div>
+<!-- Feature Card 4 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">database</span>
+<h3 class="font-headline-md text-headline-md mb-2">Data Logging</h3>
+<p class="text-on-surface-variant">Comprehensive storage of test parameters for full batch traceability.</p>
+</div>
+<!-- Feature Card 5 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">sensors</span>
+<h3 class="font-headline-md text-headline-md mb-2">Industry 4.0 Ready</h3>
+<p class="text-on-surface-variant">Seamless IoT integration for remote monitoring and predictive maintenance.</p>
+</div>
+<!-- Feature Card 6 -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant hover:shadow-2xl transition-all duration-300 group aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">verified</span>
+<h3 class="font-headline-md text-headline-md mb-2">Quality Compliance</h3>
+<p class="text-on-surface-variant">Designed to meet international standards including ISO and ASTM.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Working Process -->
+<section class="py-24 bg-surface-container overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-center mb-16">System Working Cycle</h2>
+<div class="relative flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-primary/20 -z-10"></div>
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">precision_manufacturing</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Component Loading</h4>
+<p class="text-xs text-on-surface-variant">Manual or robotic placement in fixture.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">lock</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Automatic Clamping</h4>
+<p class="text-xs text-on-surface-variant">Pneumatic cylinders seal all ports.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">air</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Pressure Filling</h4>
+<p class="text-xs text-on-surface-variant">Pressurizing the component internal cavity.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">analytics</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Leak Analysis</h4>
+<p class="text-xs text-on-surface-variant">Sensing drop in pressure over time.</p>
+</div>
+<!-- Step 5 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">rule</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Pass/Fail Decision</h4>
+<p class="text-xs text-on-surface-variant">Instant feedback via HMI &amp; signal lamps.</p>
+</div>
+<!-- Step 6 -->
+<div class="flex-1 flex flex-col items-center text-center group aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+<div class="w-24 h-24 rounded-full bg-white shadow-lg border-4 border-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">save</span>
+</div>
+<h4 class="font-label-md text-label-md mb-2">Data Storage</h4>
+<p class="text-xs text-on-surface-variant">Uploading test results to central server.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Study Highlight -->
+<section class="py-24 bg-primary text-white overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="aos-init aos-animate" data-aos="fade-right">
+<h3 class="text-secondary font-label-md text-label-md mb-2 uppercase">Real Industrial Implementation</h3>
+<h2 class="font-headline-lg text-headline-lg mb-6">IoT-Based Leak Testing for Automotive Assemblies</h2>
+<p class="font-body-md text-body-md text-white/80 mb-8">
+                        Implemented for a tier-1 automotive supplier, this system integrated real-time cloud analytics to monitor testing efficiency across multiple production lines.
+                    </p>
+<div class="grid grid-cols-2 gap-6">
+<div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+<h4 class="text-4xl font-bold mb-1 counter-value" data-target="25">25</h4>
+<p class="text-sm opacity-80">Increase in Production</p>
+</div>
+<div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+<h4 class="text-4xl font-bold mb-1 counter-value" data-target="30">30</h4>
+<p class="text-sm opacity-80">Reduction in Repeated Testing</p>
+</div>
+<div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+<h4 class="material-symbols-outlined text-4xl mb-1">trace</h4>
+<p class="text-sm opacity-80">Real-Time Traceability</p>
+</div>
+<div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+<h4 class="material-symbols-outlined text-4xl mb-1">description</h4>
+<p class="text-sm opacity-80">Automated Quality Reports</p>
+</div>
+</div>
+</div>
+<div class="relative aos-init aos-animate" data-aos="fade-left">
+<img alt="Industrial Dashboard" class="rounded-2xl shadow-2xl border-4 border-white/10" data-alt="A modern industrial control dashboard displayed on a large screen within a clean, high-tech factory environment. The screen shows real-time data visualizations, including line charts, bar graphs, and status indicators in shades of electric blue and safety orange. In the background, blurred machinery and professional staff in lab coats create a sense of advanced manufacturing and precision quality control." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUsyeeWLTkki-ENV6d3AeDf1NNSTm-_eCSWqgpe_6_5poQaFT-CM0jvrj-hSDItV-XXI4YJQpl7cjgnQ0_iq18Mue0EZkVjT03ClBcWpBY-mL8BbEz3hpnO5JijB_nBWdbjEz61yqwNiuenvOG1S5exEmgW25s5rys07t-LFmOxM62hflmWw00kuXDvNyTT8g2yefvZO4p5zzvE3GNlsEl4buClQSTQQh5bt7bq98kulNN1DxNul4e7AN5bnYI6Mgdj3t30R9ksWk">
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits & Industries -->
+<section class="py-24 blueprint-bg">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+<!-- Benefits -->
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-12">Core Benefits</h2>
+<div class="space-y-8">
+<div class="flex gap-6 items-start aos-init aos-animate" data-aos="fade-up">
+<div class="w-16 h-16 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Unmatched Quality</h3>
+<p class="text-on-surface-variant">Ensure 100% compliance with zero defects reaching your customers.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+<div class="w-16 h-16 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">timer</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Time Efficiency</h3>
+<p class="text-on-surface-variant">Optimized cycle times that keep pace with high-speed production lines.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+<div class="w-16 h-16 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Operational Savings</h3>
+<p class="text-on-surface-variant">Reduce manual labor and material waste through precise automation.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Industries -->
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-12">Target Industries</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">directions_car</span>
+<p class="font-label-md text-label-md">Automotive</p>
+</div>
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">factory</span>
+<p class="font-label-md text-label-md">Manufacturing</p>
+</div>
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">flight</span>
+<p class="font-label-md text-label-md">Aerospace</p>
+</div>
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="150">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">medical_services</span>
+<p class="font-label-md text-label-md">Medical Devices</p>
+</div>
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">energy_savings_leaf</span>
+<p class="font-label-md text-label-md">Energy &amp; Power</p>
+</div>
+<div class="p-6 bg-white shadow hover:shadow-lg transition-all rounded-xl border border-outline-variant text-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="250">
+<span class="material-symbols-outlined text-4xl text-secondary mb-2">liquor</span>
+<p class="font-label-md text-label-md">Packaging</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technology & Gallery -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-center mb-16">Technology &amp; Visual Showcase</h2>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 mb-24">
+<div class="break-inside-avoid aos-init aos-animate" data-aos="fade-up">
+<img class="w-full rounded-xl" data-alt="Detailed macro shot of high-quality industrial pneumatic fittings and stainless steel tubes inside an automation panel. The focus is sharp on the precision threads and polished metal surfaces, with soft bokeh highlighting the technical complexity. The lighting is clean and professional, emphasizing a sterile and highly controlled engineering environment using a palette of silver and cool blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC33i4NEN75OG4JbQ21JFMZsCmEqC0vg0uDUG0zdetD3vgsbmtTK0OEYPC8AWV3nHWE_b8pzbylcimA2AFGj2Xg4zIHmL8p25ggIxNq-y8QXz7gHZLTnyxYM68IoMZwuNSdt9PE6Hm18dcs5v8CKdZjlUCSFXm95aAPHJ8Lb4kZjGMMvneJdT8Mm3OTjqURLbcHQox-kBykJVLUh6bJu49ugaaeqvDfifuvJ7BG2Rdw-B0OT6ssDN5pwnQeyG16uMs_ncL2UoBMzqc">
+</div>
+<div class="break-inside-avoid aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+<img class="w-full rounded-xl" data-alt="Close-up of a high-performance industrial PLC board with glowing green and amber status LEDs. The intricate electronic circuits are visible, showcasing the 'brains' of the automation system. The atmosphere is tech-forward and sophisticated, with a shallow depth of field focusing on the primary processing unit, using a professional industrial color scheme of dark grays and vibrant indicator lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVmzeOgpYU3hLh5ELSdxgaArbE42Ui_Lbwlz8illnQyAfBLrE_ZcLuUPdXJFQvVUhxh0vqrPjk2piwbovH3-mDdxsgnJyiTCiLA3njhZRvsmxHY-V3qmbg7zM3WRm6HY3RiJhgA3tA7MREagIkNwBx-XVQfeC2Wpn4F00cXxKnZWyu3a7BvdaFJKhjn3mzXZ-_7giqyRwIiDBTtLxVkn4004pqzwBynJyilz64n6NWhZxJqjL1BqNzP50HSjV4ZRzsS1xv52mTsA8">
+</div>
+<div class="break-inside-avoid aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+<img class="w-full rounded-xl" data-alt="A clean, minimalist laboratory setting featuring high-precision pressure sensors and digital display modules. The equipment is mounted on an aluminum profile frame, typical of modern SPM design. The lighting is bright and airy, creating an 'optics-grade' visual feel with a palette dominated by pure whites and deep industrial blues, representing clinical precision and reliable engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC16KwcIjRBCSywpNSFOUMcJRWmdSBzXMlLBi95EFEtX0Rvh1G444eH7t5QJfF4udqXWwFOiXvJHGpsNSkgrnqhQbd_-44ej8ES9fwogO8-W31sBC479fvwAngcaWNmFHSKLtflredh73X0y4BhO5EZ4xw-N24I3PysnMMU57oewlhz2I16MUDaqjeCsy8XNyKMNIFKHUX0JsJ87VUbMgO6KtVBwQwoSd384IAMUExpFuiuDyZiBE7DKpeD-HvIBPO5O1Bwaj4rSus">
+</div>
+<div class="break-inside-avoid aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+<img class="w-full rounded-xl" data-alt="Industrial robotic arm precisely positioning a mechanical component into a leak testing fixture. The motion is captured with a slight blur to convey speed and efficiency. The setting is a state-of-the-art factory floor with overhead LED lighting creating crisp highlights on the yellow robotic chassis and metallic components, evoking a sense of powerful, high-speed automation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtWMbF1gWTtDb7z0HsNbxnxX0ItK3pcAoVEs3ObczzRtm5Y0eGh6TkDfSf8PhSQk2smyZQ5WoIDxejLt2DymdxwdC9iYdlrBSrlKB-phtoYuPjKNSFy3ySlAl2IDF7Cj56peNYS83KMD_16D_0eYW8IZQqJWmCB5w4lMN6PB5_Y7Ut4ljswoXeOLmJ6-b68D03a647zyvQo__IUrFrYhu2GN5Bun4US8FnzpRhrDpq0Oh1cJt0PvgIK4XqubbBVQvDJc2NNnOq8qo">
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-5xl">memory</span>
+<span class="font-label-sm uppercase tracking-widest">PLC LOGIC</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-5xl">settings_remote</span>
+<span class="font-label-sm uppercase tracking-widest">HMI INTERFACE</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-5xl">cloud_sync</span>
+<span class="font-label-sm uppercase tracking-widest">SCADA / IoT</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-5xl">bolt</span>
+<span class="font-label-sm uppercase tracking-widest">SERVO DRIVE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-24 bg-surface-container-highest">
+<div class="max-w-container-max-width mx-auto px-margin-desktop text-center">
+<div class="bg-white p-12 rounded-3xl shadow-2xl border border-outline-variant max-w-4xl mx-auto aos-init aos-animate" data-aos="zoom-in">
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface">Need Reliable Leak Testing Automation?</h2>
+<p class="text-on-surface-variant font-body-lg mb-8">Discuss your specific testing requirements with our engineering team for a custom-tailored solution.</p>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="bg-primary text-white px-10 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container shadow-lg transition-all active:scale-95">GET A QUOTE</button>
+<a class="bg-secondary text-white px-10 py-4 rounded-lg font-label-md text-label-md hover:bg-secondary-container shadow-lg transition-all flex items-center gap-2" href="https://wayzontech.in/wp-content/uploads/2025/03/Case-Study-Leak-Test-SPM.pdf">
+                        VIEW CASE STUDY PDF
+                        <span class="material-symbols-outlined">download</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+    class ThreeJSScene extends HTMLElement {
+        connectedCallback() {
+            const container = this;
+            const src = this.getAttribute('src');
+            if (src) {
+                const scriptContent = src;
+                const executeAnimation = new Function('container', 'THREE', scriptContent);
+                executeAnimation(container, THREE);
+            }
+        }
+    }
+    customElements.define('threejs-scene', ThreeJSScene);
+
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-out-quad'
+    });
+
+    // Counter Animation Logic
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const endValue = parseInt(target.getAttribute('data-target'));
+                let startValue = 0;
+                const duration = 2000;
+                const increment = endValue / (duration / 16);
+                
+                const animate = () => {
+                    startValue += increment;
+                    if (startValue < endValue) {
+                        target.innerText = Math.ceil(startValue);
+                        requestAnimationFrame(animate);
+                    } else {
+                        target.innerText = endValue;
+                    }
+                };
+                animate();
+                counterObserver.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.counter-value').forEach(counter => {
+        counterObserver.observe(counter);
+    });
+
+    // Sticky Nav logic
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('py-2', 'shadow-md');
+            nav.classList.remove('py-4', 'shadow-sm');
+        } else {
+            nav.classList.add('py-4', 'shadow-sm');
+            nav.classList.remove('py-2', 'shadow-md');
+        }
+    });
+</script>
+
+
+
+
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>

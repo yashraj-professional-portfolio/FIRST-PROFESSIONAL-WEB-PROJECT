@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Hydraulic Press SPM | Proximo Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c1c7d3",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-container": "#667186",
+                        "surface-tint": "#0061a6",
+                        "surface-container-high": "#e6e8ea",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdbc8",
+                        "on-primary-fixed-variant": "#00497f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-fixed": "#111c2d",
+                        "inverse-primary": "#a0c9ff",
+                        "on-tertiary-container": "#f4f6ff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#bcc7de",
+                        "on-secondary-fixed": "#321300",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed": "#d8e3fb",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#ff8429",
+                        "primary-fixed": "#d2e4ff",
+                        "primary-container": "#1e73be",
+                        "on-secondary-fixed-variant": "#743400",
+                        "on-primary-container": "#f2f5ff",
+                        "secondary": "#994700",
+                        "status-warning": "#F59E0B",
+                        "tertiary": "#4e596d",
+                        "on-surface-variant": "#414751",
+                        "background": "#f7f9fb",
+                        "primary-fixed-dim": "#a0c9ff",
+                        "primary": "#005a9c",
+                        "on-primary-fixed": "#001c37",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "outline": "#717782",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "surface": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "blueprint-line": "rgba(30, 115, 190, 0.08)",
+                        "status-success": "#10B981",
+                        "on-secondary": "#ffffff",
+                        "status-error": "#EF4444",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-container": "#632c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter-mobile": "16px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max-width": "1280px",
+                        "gutter-desktop": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .blueprint-grid {
+            background-size: 32px 32px;
+            background-image: linear-gradient(to right, rgba(30, 115, 190, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(30, 115, 190, 0.05) 1px, transparent 1px);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md blueprint-grid overflow-x-hidden">
+<!-- Navigation Shell (TopAppBar) -->
+<!-- 1. TOP INFORMATION BAR -->
+<div class="w-full bg-[#F47C20] py-2 px-margin-desktop hidden md:block relative z-[60]">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center text-white font-label-sm">
+<span class="">Welcome to PROXIMO</span>
+<div class="flex items-center space-x-6">
+<a class="flex items-center gap-2 hover:opacity-80" href="mailto:anandghule@proximoautomation.com">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    anandghule@proximoautomation.com
+                </a>
+<a class="flex items-center gap-2 hover:opacity-80" href="tel:+918275452882">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                    +91 8275452882
+                </a>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR -->
+<nav class="docked full-width top-0 sticky z-50 bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-blueprint-line shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+  <a href="index.html">
+    <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+  </a>
+</div>
+<div class="hidden lg:flex flex-grow items-center justify-evenly mx-8">
+<a id="nav-home" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="index.html">Home</a>
+<a id="nav-about" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="about.html">About Us</a>
+<a id="nav-services" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="services.html">Services</a>
+<a id="nav-case-studies" class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md text-lg" href="case-studies.html">Case Studies</a>
+<a id="nav-industrial-iot" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="industrial-iot.html">Industrial IoT</a>
+<a id="nav-gallery" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="gallery.html">Gallery</a>
+<a id="nav-contact" class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md text-lg font-bold" href="contact.html">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<a href="contact.html" class="bg-[#1E73BE] text-white px-6 py-2 rounded-lg font-label-md text-label-md font-bold hover:scale-105 active:scale-95 transition-all text-center">REQUEST DEMO</a>
+<button class="lg:hidden material-symbols-outlined text-primary text-3xl focus:outline-none" onclick="toggleMobileMenu()">menu</button>
+</div>
+</div>
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="hidden w-full bg-white/95 dark:bg-inverse-surface/95 backdrop-blur-xl border-t border-blueprint-line px-margin-desktop py-4 flex flex-col space-y-3 lg:hidden">
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="index.html">Home</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="about.html">About Us</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="services.html">Services</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="case-studies.html">Case Studies</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="industrial-iot.html">Industrial IoT</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-blueprint-line/10" href="gallery.html">Gallery</a>
+  <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="contact.html">Contact Us</a>
+  <a class="bg-primary text-white text-center py-2.5 rounded-lg font-bold font-label-md" href="contact.html">REQUEST DEMO</a>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Breadcrumb -->
+<section class="max-w-container-max-width mx-auto px-margin-desktop py-4">
+<nav class="flex items-center gap-2 text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Products</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Hydraulic Press SPM</span>
+</nav>
+</section>
+<!-- Hero Section -->
+<section class="relative h-[80vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Hydraulic Press Hero" class="w-full h-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida/AP1WRLs-Am2w8FSLW3updLpWko_eQAHNnfrbzb7QIJHK_jyt3k14wQ5y2LJy8nDhESeI3miT6wBBESqOZUchtvnaghmHsGLFB75keRM5ukZim20h85eFxM3DWblQgxKbGVIli8KVxWdEiTURA0dhQrqwWjWNc31EoOKZg_V9Wq7LI2gWt1zVBTJ9p3Oj2y6da90sm1ADAhWMtmeXPOnEoNOa6oiNrNM6pQAWMrcZGrmFy9DmDbwposeKGhXW_54">
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/80 via-on-surface/40 to-transparent"></div>
+<!-- Animated Overlays -->
+<div class="absolute inset-0 blueprint-grid opacity-30"></div>
+</div>
+<div class="relative z-10 max-w-container-max-width mx-auto px-margin-desktop w-full text-white">
+<div class="max-w-2xl reveal-on-scroll active" data-scroll="">
+<span class="inline-block py-1 px-3 bg-secondary text-on-secondary font-label-sm text-label-sm mb-6 rounded-sm">INDUSTRIAL SOLUTIONS</span>
+<h1 class="font-display-lg text-display-lg leading-tight mb-4">Hydraulic Press SPM</h1>
+<p class="font-body-lg text-body-lg mb-10 text-surface-variant max-w-xl">High Force Precision Pressing Solutions for Modern Manufacturing. Engineered for maximum reliability in high-cycle industrial environments.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-4 font-label-md text-label-md transition-all flex items-center gap-2 rounded-lg group">
+                            View Technical Specifications
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 font-label-md text-label-md transition-all rounded-lg">
+                            Request Consultation
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Overview -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="relative reveal-on-scroll active" data-scroll="">
+<div class="absolute -top-4 -left-4 w-32 h-32 border-t-2 border-l-2 border-primary-container/30"></div>
+<img alt="Hydraulic Press Technical View" class="w-full h-auto rounded shadow-2xl relative z-10" src="https://lh3.googleusercontent.com/aida/AP1WRLuQQqKuyLNcPBkthi68t6Jg-mLwBDMc3oqtmCCS3CJHYO_1NhpOaNYw92cJzxjO0jIFby_XwOVtMuKdrK4dMP3SitywD8oSSzolFemLMhA0ymlXKch18NgpiU5z_2J3mlBEbZhlnrca-Izx7b6efBKzvxA12d7BhDIRORGcdm1belsKygzBhRjmbWTeKFm3CwxG2Tdug2M8WIjIOt13NJg8X_FLb02jCrygvJAbulELnfHAMTO60wfN1Q">
+<div class="absolute -bottom-4 -right-4 w-32 h-32 border-b-2 border-r-2 border-secondary/30"></div>
+</div>
+<div class="reveal-on-scroll active" data-scroll="">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Advanced Hydraulic Engineering</h2>
+<div class="space-y-6">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                Our Special Purpose Hydraulic Press machines are bespoke solutions designed to integrate seamlessly into your production line. Unlike standard presses, our SPMs are built with task-specific tooling and automated handling systems to optimize cycle times.
+                            </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                From <strong>high-pressure punching</strong> to <strong>precise deep drawing</strong> and <strong>automated riveting</strong>, our systems utilize sophisticated proportional valve control to ensure millimeter-perfect force application throughout the entire stroke.
+                            </p>
+<ul class="grid grid-cols-2 gap-4">
+<li class="flex items-center gap-2 text-label-md font-semibold text-on-surface">
+<span class="material-symbols-outlined text-status-success">check_circle</span> Precision Pressing
+                                </li>
+<li class="flex items-center gap-2 text-label-md font-semibold text-on-surface">
+<span class="material-symbols-outlined text-status-success">check_circle</span> Automated Punching
+                                </li>
+<li class="flex items-center gap-2 text-label-md font-semibold text-on-surface">
+<span class="material-symbols-outlined text-status-success">check_circle</span> Riveting Operations
+                                </li>
+<li class="flex items-center gap-2 text-label-md font-semibold text-on-surface">
+<span class="material-symbols-outlined text-status-success">check_circle</span> Deep Drawing &amp; Forming
+                                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-container-max-width mx-auto px-margin-desktop text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">The Proximo Advantage</h2>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">fitness_center</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">High Pressing Force</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Capable of delivering up to 500 tons of controlled pressure for heavy-duty industrial applications.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">precision_manufacturing</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Precision Control</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time monitoring and proportional valve adjustment for sub-millimeter stroke accuracy.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">speed</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Improved Productivity</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Optimized cycle times through automated loading systems and multi-stage processing capability.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Reliable Operation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Built with premium components to ensure 24/7 operation with minimal maintenance downtime.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">health_and_safety</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Enhanced Safety</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Integrated light curtains, emergency dual-button operation, and advanced interlocking systems.</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-10 border border-outline-variant hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal-on-scroll active" data-scroll="">
+<div class="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-lg mb-8 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl">eco</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Energy Efficiency</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Servo-driven hydraulic systems that consume power only during the active pressing stroke.</p>
+</div>
+</div>
+</section>
+<!-- Working Process -->
+<section class="py-24 bg-white overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-20">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Process Workflow</h2>
+<p class="text-on-surface-variant">Precision in Every Step of the Production Cycle</p>
+</div>
+<div class="relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container-high -translate-y-1/2 hidden md:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-6 gap-8">
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-primary-container flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-primary group-hover:text-white">inventory_2</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">01</h4>
+<p class="font-semibold text-center">Component Loading</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-primary-container flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-primary group-hover:text-white">track_changes</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">02</h4>
+<p class="font-semibold text-center">Positioning</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-primary-container flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-primary group-hover:text-white">lock</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">03</h4>
+<p class="font-semibold text-center">Clamping</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-primary border-4 border-primary-container flex items-center justify-center mb-6 animate-pulse">
+<span class="material-symbols-outlined text-white">compress</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">04</h4>
+<p class="font-semibold text-center">Pressing</p>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-primary-container flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-primary group-hover:text-white">fact_check</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">05</h4>
+<p class="font-semibold text-center">Verification</p>
+</div>
+<!-- Step 6 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-primary-container flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-primary group-hover:text-white">output</span>
+</div>
+<h4 class="font-label-md text-label-md text-primary mb-2">06</h4>
+<p class="font-semibold text-center">Unloading</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Performance Metrics -->
+<section class="py-20 bg-primary-container text-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+<div>
+<div class="text-4xl md:text-6xl font-bold mb-2 font-display-lg"><span class="counter" data-target="200">0</span>+</div>
+<p class="text-label-md uppercase tracking-wider opacity-80">Ton Capacity</p>
+</div>
+<div>
+<div class="text-4xl md:text-6xl font-bold mb-2 font-display-lg"><span class="counter" data-target="35">0</span>%</div>
+<p class="text-label-md uppercase tracking-wider opacity-80">Faster Production</p>
+</div>
+<div>
+<div class="text-4xl md:text-6xl font-bold mb-2 font-display-lg"><span class="counter" data-target="99">0</span>%</div>
+<p class="text-label-md uppercase tracking-wider opacity-80">Consistency</p>
+</div>
+<div>
+<div class="text-4xl md:text-6xl font-bold mb-2 font-display-lg"><span class="counter" data-target="30">0</span>%</div>
+<p class="text-label-md uppercase tracking-wider opacity-80">Lower Ops Cost</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Section -->
+<section class="py-24 bg-white">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Evolution of Efficiency</h2>
+<p class="text-on-surface-variant">How our SPM transforms traditional pressing workflows</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/30 overflow-hidden rounded-xl border border-outline-variant">
+<div class="bg-surface-container-low p-12">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-status-error">cancel</span>
+<h4 class="font-headline-md text-headline-md">Traditional Pressing</h4>
+</div>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<span class="text-status-error font-bold">-</span>
+<div>
+<p class="font-semibold mb-1">Manual Handling</p>
+<p class="text-sm text-on-surface-variant">Frequent manual loading increases safety risks and operator fatigue.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-status-error font-bold">-</span>
+<div>
+<p class="font-semibold mb-1">Inconsistent Pressure</p>
+<p class="text-sm text-on-surface-variant">Fixed-rate hydraulics lead to high reject rates in complex parts.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-status-error font-bold">-</span>
+<div>
+<p class="font-semibold mb-1">Slow Changeovers</p>
+<p class="text-sm text-on-surface-variant">Manual die adjustments take hours, stalling production runs.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="bg-primary/5 p-12 relative overflow-hidden">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 text-xs font-bold rounded">RECOMMENDED</div>
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-status-success">check_circle</span>
+<h4 class="font-headline-md text-headline-md text-primary">Hydraulic Press SPM</h4>
+</div>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<span class="text-status-success font-bold">+</span>
+<div>
+<p class="font-semibold mb-1 text-primary">Full Automation</p>
+<p class="text-sm text-on-surface-variant">Pick-and-place robotics eliminate manual interaction with the press zone.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-status-success font-bold">+</span>
+<div>
+<p class="font-semibold mb-1 text-primary">Proportional Force Control</p>
+<p class="text-sm text-on-surface-variant">Real-time feedback loops ensure 100% part consistency.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-status-success font-bold">+</span>
+<div>
+<p class="font-semibold mb-1 text-primary">Quick-Change Tooling</p>
+<p class="text-sm text-on-surface-variant">Hydraulic clamping allows tool changes in under 5 minutes.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Banner -->
+<section class="py-20 relative bg-on-surface text-white overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+<div>
+<h2 class="font-headline-lg text-display-lg mb-4">Ready to Improve Your Pressing Operations?</h2>
+<p class="text-surface-variant text-body-lg">Consult with our automation experts to design your custom SPM today.</p>
+</div>
+<div class="flex flex-wrap gap-4 shrink-0">
+<button class="bg-secondary text-white px-8 py-4 font-label-md text-label-md rounded-lg hover:brightness-110 transition-all shadow-lg">Contact Us</button>
+<button class="bg-transparent border border-white/30 text-white px-8 py-4 font-label-md text-label-md rounded-lg hover:bg-white/10 transition-all">Request a Demo</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-inverse-surface border-t border-primary/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter-desktop px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<!-- Brand Bio -->
+<div class="space-y-6">
+<a href="index.html">
+  <img src="logo.png" alt="PROXIMO Logo" class="h-10 w-auto object-contain">
+</a>
+<p class="font-body-md text-on-primary-container/80 dark:text-surface-variant">Engineering precision in automation and robotics. Delivering scalable Industry 4.0 solutions since 2014.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+</a>
+</div>
+</div>
+<!-- Services -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Services</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">PLC Automation</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="industrial-iot.html">Industrial IoT</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Robotic Solutions</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="services.html">Special Purpose Machines</a></li>
+</ul>
+</div>
+<!-- Quick Links -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Quick Links</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="about.html">About Us</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="case-studies.html">Case Studies</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="gallery.html">Gallery</a></li>
+<li class=""><a class="font-label-md text-on-primary-container/80 dark:text-surface-variant hover:text-white hover:translate-x-1 transition-transform inline-block text-lg" href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+<!-- Reach Us -->
+<div class="space-y-6">
+<h5 class="font-label-md text-white font-bold uppercase tracking-widest">Reach Us</h5>
+<div class="space-y-4 font-body-md text-on-primary-container/80 dark:text-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="">Plot No 12, Industrial Area, Phase II, Pune, Maharashtra 411026, India</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="">+91 8275452882</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<span class="">anandghule@proximoautomation.com</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-margin-desktop border-t border-white/10 py-8 flex flex-col md:row justify-between items-center gap-4">
+<span class="font-label-md text-on-primary-container/60">© 2024 Proximo Robotics &amp; Automation. Engineering Precision.</span>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Terms</a>
+<a class="font-label-sm text-on-primary-container/60 hover:text-white" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Counter animation trigger
+                    if (entry.target.querySelector('.counter')) {
+                        startCounters(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function startCounters(container) {
+            const counters = container.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 50;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(() => startCounters(container), 20);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Navigation Highlight on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+                header.classList.remove('bg-white/70');
+                header.classList.add('bg-white/95');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.remove('bg-white/95');
+                header.classList.add('bg-white/70');
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+</script>
+</body></html>
